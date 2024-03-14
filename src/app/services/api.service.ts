@@ -10,7 +10,7 @@ import { environment } from './environments/environment.local';
 })
 export class ApiService {
   private http = inject(HttpClient);
-  private categoryUrl: string = environment.baseUrl + "/Categories";
+  private categoryUrl: string = environment.baseUrl + "api/Categories";
 
   getCategory(id: GUID): Observable<Category> {
     const url = this.categoryUrl + "/GetCategory/" + id;

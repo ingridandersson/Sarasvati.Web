@@ -38,6 +38,7 @@ export class ListCategoriesComponent {
     try {
       this.categories = await this.categorySvc.getAllCategories();
       console.log(this.categories);
+      this.dataSource = new MatTableDataSource(this.categories);
     } catch (error) {
       this.errorMessage = 'An error occurred while fetching categories.';
       console.error(error);
