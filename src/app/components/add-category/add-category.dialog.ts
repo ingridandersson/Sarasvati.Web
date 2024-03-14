@@ -4,10 +4,13 @@ import { AngularMaterialComponent } from '../../common/angular-material/angular-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../../services/api.service';
+import { Category } from '../../models/category.model';
+import { ListCategoriesComponent } from '../list-categories/list-categories.component';
 @Component({
   selector: 'app-add-category',
   standalone: true,
-  imports: [AngularMaterialComponent, MatFormFieldModule, MatDialogModule, MatInputModule, FormsModule],
+  imports: [AngularMaterialComponent, MatFormFieldModule, MatDialogModule, MatInputModule, FormsModule, ListCategoriesComponent],
   templateUrl: './add-category.dialog.html',
   styleUrl: './add-category.dialog.scss'
 })
@@ -16,8 +19,23 @@ export class AddCategoryDialog {
 
   dialogRef = inject(MatDialogRef);
   data = inject(MAT_DIALOG_DATA);
+  service = inject(ApiService);
+  errorMessage: string | undefined;
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  async saveCategory(): Promise<void> {
+    try {
+    this.data = await this.service.addCategory(this.data);
+    console.log(this.data);
+    this.dialogRef.close(this.data);
+    
+    }
+    catch(error)
+    {
+      this.errorMessage = 'An error occured while adding a category. Try again!';
+      console.error(error);
+    }
   }
 }
