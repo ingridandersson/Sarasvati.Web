@@ -4,6 +4,7 @@ import { NavMenuComponent } from "./common/nav-menu/nav-menu.component";
 import { ListCategoriesComponent } from './components/list-categories/list-categories.component';
 import { HomeComponent } from './common/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DetailsCategoryComponent } from './components/details-category/details-category.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavMenuComponent,
     ListCategoriesComponent,
     HomeComponent,
-    HttpClientModule
+    HttpClientModule,
+    DetailsCategoryComponent
   ]
 })
 export class AppComponent {
