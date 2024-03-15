@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Category } from '../../models/category.model';
 import { ListCategoriesComponent } from '../list-categories/list-categories.component';
+import { CategoryService } from '../../services/category.service';
+import { ICategoryService } from '../../abstract/icategory-service';
+
 @Component({
   selector: 'app-add-category',
   standalone: true,
@@ -19,21 +22,20 @@ export class AddCategoryDialog {
 
   dialogRef = inject(MatDialogRef);
   data = inject(MAT_DIALOG_DATA);
-  service = inject(ApiService);
+  service = inject(CategoryService) as ICategoryService;
   errorMessage: string | undefined;
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   async saveCategory(): Promise<void> {
     try {
-    this.data = await this.service.addCategory(this.data);
-    console.log(this.data);
-    this.dialogRef.close(this.data);
-    
+      this.data = await this.service.addCategory(this.data);
+      console.log(this.data);
+      this.dialogRef.close(this.data);
     }
-    catch(error)
-    {
+    catch (error) {
       this.errorMessage = 'An error occured while adding a category. Try again!';
       console.error(error);
     }

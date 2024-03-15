@@ -1,4 +1,4 @@
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { ICategoryService } from '../abstract/icategory-service';
 import { Category } from '../models/category.model';
 import { ApiService } from './api.service';
@@ -12,23 +12,23 @@ export class CategoryService implements ICategoryService {
 
   apiSvc = inject(ApiService);
 
-  getCategory(id: GUID): Promise<Category> {
-    return firstValueFrom(this.apiSvc.getCategory(id));
+  async getCategory(id: GUID): Promise<Category> {
+    return await firstValueFrom(this.apiSvc.getCategory(id));
   }
 
-  getAllCategories(): Promise<Category[]> {
-    return firstValueFrom(this.apiSvc.getAllCategories());
+  async getAllCategories(): Promise<Category[]> {
+    return await lastValueFrom(this.apiSvc.getAllCategories());
   }
 
-  updateCategory(category: Category): Promise<Category> {
-    return firstValueFrom(this.apiSvc.updateCategory(category));
+  async updateCategory(category: Category): Promise<Category> {
+    return await firstValueFrom(this.apiSvc.updateCategory(category));
   }
 
-  addCategory(category: Category): Promise<Category> {
-    return firstValueFrom(this.apiSvc.addCategory(category));
+  async addCategory(category: Category): Promise<Category> {
+    return await firstValueFrom(this.apiSvc.addCategory(category));
   }
 
-  deleteCategory(id: GUID): Promise<Category> {
-    return firstValueFrom(this.apiSvc.deleteCategory(id));
+  async deleteCategory(id: GUID): Promise<Category> {
+    return await firstValueFrom(this.apiSvc.deleteCategory(id));
   }
 }

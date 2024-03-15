@@ -10,11 +10,12 @@ import { firstValueFrom } from 'rxjs';
 import { AngularMaterialComponent } from '../../common/angular-material/angular-material.component';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-list-categories',
   standalone: true,
-  imports: [AngularMaterialComponent, RouterLink, MatIconModule, MatTableModule],
+  imports: [AngularMaterialComponent, RouterLink, MatIconModule, MatTableModule, MatButtonModule],
   templateUrl: './list-categories.component.html',
   styleUrl: './list-categories.component.scss'
 })
@@ -77,7 +78,9 @@ export class ListCategoriesComponent {
       try {
         const res = await this.categorySvc.addCategory(result);
         console.log(res);
-        await this.refreshList();
+        setTimeout(async () => {
+          await this.refreshList();
+        }, 1000);
       } catch (e) {
         console.error(e);
         this.errorMessage = 'An error occurred while adding the category. Please try again.';
