@@ -10,15 +10,15 @@ import { environment } from './environments/environment.local';
 })
 export class ApiService {
   private http = inject(HttpClient);
-  private categoryUrl: string = environment.baseUrl + "api/Categories";
+  private categoryUrl: string = environment.baseUrl + 'api/Categories';
 
   getCategory(id: GUID): Observable<Category> {
-    const url = this.categoryUrl + "/GetCategory/" + id;
+    const url = this.categoryUrl + '/GetCategory/' + id;
     return this.http.get<Category>(url);
   }
 
   getAllCategories(): Observable<Category[]> {
-    const url = this.categoryUrl + "/GetAllCategories";
+    const url = this.categoryUrl + '/GetAllCategories';
     return this.http.get<Category[]>(url);
   }
 
@@ -33,7 +33,7 @@ export class ApiService {
   }
 
   deleteCategory(id: GUID): Observable<Category> {
-    const url = this.categoryUrl + "/DeleteCategory/" + id;
+    const url = this.categoryUrl + '/DeleteCategory/' + id;
     return this.http.delete<Category>(url);
   }
 }

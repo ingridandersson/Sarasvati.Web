@@ -17,14 +17,14 @@ export class DetailsCategoryComponent {
   title = 'Category Details';
   public category?: Category;
   errorMessage: string | undefined;
-  categoryId? : GUID;
+  categoryId?: GUID;
 
-  activatedRoute= inject(ActivatedRoute);
+  activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
 
   async ngOnInit(): Promise<void> {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.categoryId= guid(id!);
+    this.categoryId = guid(id!);
     this.fetchCategory(this.categoryId);
   }
 
@@ -32,9 +32,8 @@ export class DetailsCategoryComponent {
     try {
       this.category = await this.service.getCategory(id);
     } catch (error) {
-      this.errorMessage = ' An Error occurred while ferching category.';
+      this.errorMessage = 'An error occurred while fetching category.';
       console.error(error);
     }
-}
-
+  }
 }
