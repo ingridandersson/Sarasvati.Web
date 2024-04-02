@@ -1,4 +1,49 @@
 h1 {
-  margin-left: 15px;
   margin-top: 20px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  color: rgb(70, 96, 211);
+  font-size: 2rem;
+}
+
+h3 {
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.buttons {
+  margin-left: 5.5rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.button-save {
+  margin-right: 20px;
+  background-color: rgb(84, 173, 84);
+  color: white;
+  border-color: rgb(180, 178, 175);
+  border-radius: 0%;
+}
+
+.button-save:hover {
+  background-color: rgb(41, 143, 41);
+  border-color: rgb(180, 178, 175);
+  color: white;
+}
+
+.button-cancel {
+  background-color: rgb(70, 96, 211);
+  color: white;
+}
+
+.button-cancel:hover {
+  background-color: rgb(50, 71, 163);
+  color: white;
 }

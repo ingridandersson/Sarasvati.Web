@@ -1,11 +1,37 @@
-<h1 id="tableLabel">{{ title }}</h1>
+<div class="header-container">
+  <button class="icon" mat-icon-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 id="tableLabel">{{ title }}</h1>
+</div>
+
 @if(!category)
 {
-  Loading...
+Loading...
 }
 
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>{{ category?.name }}</mat-card-title>
-    </mat-card-header>
-</mat-card>
+@if(category)
+{
+<table mat-table [dataSource]="[category]" class="mat-elevation-z8">
+  <ng-container matColumnDef="header">
+    <tr mat-header-row *matHeaderRowDef="['header']"></tr>
+    <td mat-header-cell *matHeaderCellDef colspan="2">
+      <h3>{{ category.name }} (ID: {{ categoryId }})</h3>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="editCategory">
+    <tr mat-row *matRowDef="let row; columns: ['editCategory'];"></tr>
+    <td mat-cell *matCellDef="let category">
+      <form class="form">
+        <label for="categoryName">Category:</label>
+        <input id="categoryName" type="text" [formControl]="nameControl">
+        <div class="buttons">
+          <button class="button-save" type="button" (click)="save()">Save</button>
+          <button class="button-cancel" type="button" (click)="goBack()">Cancel</button>
+        </div>
+      </form>
+    </td>
+  </ng-container>
+</table>
+
+}
