@@ -78,9 +78,7 @@ export class ListCategoriesComponent {
       try {
         const res = await this.categorySvc.addCategory(result);
         console.log(res);
-        setTimeout(async () => {
-          await this.refreshList();
-        }, 1000);
+        this.dataSource.data = [...this.dataSource.data, res];
       } catch (e) {
         console.error(e);
         this.errorMessage = 'An error occurred while adding the category. Please try again.';
