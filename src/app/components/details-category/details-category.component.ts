@@ -10,13 +10,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-details-category',
   standalone: true,
-  imports: [MatIconModule, MatTableModule, MatButtonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule],
+  imports: [MatIconModule, MatTableModule, MatButtonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, CommonModule],
   templateUrl: './details-category.component.html',
   styleUrl: './details-category.component.scss'
 })
@@ -27,9 +28,9 @@ export class DetailsCategoryComponent {
   categoryId?: GUID;
   nameControl: FormControl = new FormControl('');
 
-
   activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
+
   router = inject(Router);
 
   goBack(): void {
@@ -51,6 +52,12 @@ export class DetailsCategoryComponent {
       console.error(error);
     }
   }
+
+  toggleEditForm(): void {
+    this.showEditForm = !this.showEditForm;
+    console.log("Show Edit Form: ", this.showEditForm);
+  }
+
   async save(): Promise<void> {
     if (this.category) {
       this.category.name = this.nameControl.value;
@@ -63,7 +70,5 @@ export class DetailsCategoryComponent {
       }
     }
   }
-
-
-
+  public showEditForm = false;
 }

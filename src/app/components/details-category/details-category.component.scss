@@ -28,11 +28,19 @@ h4 {
   margin-left: 15px;
 }
 
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+}
+
 .accent {
   background-color: rgb(99, 101, 114);
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .buttons {
   margin-bottom: 20px;
+  margin-left: 15px;
 }
