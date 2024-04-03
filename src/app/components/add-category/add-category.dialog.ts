@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { ListCategoriesComponent } from '../list-categories/list-categories.component';
 import { CategoryService } from '../../services/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-add-category',
   standalone: true,
-  imports: [AngularMaterialComponent, MatFormFieldModule, MatDialogModule, MatInputModule, FormsModule, ListCategoriesComponent],
+  imports: [AngularMaterialComponent, MatFormFieldModule, MatDialogModule, MatInputModule, FormsModule, ListCategoriesComponent, MatButtonModule],
   templateUrl: './add-category.dialog.html',
   styleUrl: './add-category.dialog.scss'
 })

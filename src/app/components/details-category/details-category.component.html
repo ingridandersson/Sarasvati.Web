@@ -15,8 +15,9 @@ Loading...
 <table mat-table [dataSource]="[category]" class="mat-elevation-z8">
   <ng-container matColumnDef="header">
     <tr mat-header-row *matHeaderRowDef="['header']"></tr>
-    <td mat-header-cell *matHeaderCellDef colspan="2">
-      <h3>{{ category.name }} (ID: {{ categoryId }})</h3>
+    <td class="space" mat-header-cell *matHeaderCellDef colspan="2">
+      <h2>{{ category.name }}</h2>
+      <h4>(ID: {{ categoryId }})</h4>
     </td>
   </ng-container>
   <ng-container matColumnDef="editCategory">
