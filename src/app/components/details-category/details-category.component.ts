@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Category } from '../../models/category.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';
 import { GUID, guid } from '../../models/guid.model';
@@ -8,13 +8,15 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { Location } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 @Component({
   selector: 'app-details-category',
   standalone: true,
-  imports: [MatIconModule, MatTableModule, MatButtonModule, ReactiveFormsModule,],
+  imports: [MatIconModule, MatTableModule, MatButtonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule],
   templateUrl: './details-category.component.html',
   styleUrl: './details-category.component.scss'
 })
@@ -25,13 +27,13 @@ export class DetailsCategoryComponent {
   categoryId?: GUID;
   nameControl: FormControl = new FormControl('');
 
+
   activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
-  private location = inject(Location);
-
+  router = inject(Router);
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['categories']);
   }
 
   async ngOnInit(): Promise<void> {

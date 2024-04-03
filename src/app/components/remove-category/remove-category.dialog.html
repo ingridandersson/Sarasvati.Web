@@ -1,9 +1,11 @@
 <h1 mat-dialog-title>{{title}}</h1>
 <div mat-dialog-content>
-    <p>Are you sure you want to remove this category?</p>
-    <!-- trying to implement data-binding {this category}  -->
+  <p>Are you sure you want to remove <span class="category-name">{{category.name}}</span>?</p>
+
 </div>
-<div mat-dialog-actions>
-    <button mat-button color="warn" (click)="confirmRemove()">Delete</button>
-    <button mat-button (click)="cancel()">Cancel</button>
-</div>
+<form>
+  <div class="buttons">
+    <button mat-raised-button color="warn" (click)="confirmRemove()">Delete</button>
+    <button mat-raised-button color="accent" class="accent" (click)="cancel()">Cancel</button>
+  </div>
+</form>

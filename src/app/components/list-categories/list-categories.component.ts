@@ -57,8 +57,10 @@ export class ListCategoriesComponent {
   }
 
   async removeCategory(id: GUID): Promise<void> {
+    const categoryToBeRemoved = this.dataSource.data.find(c => c.id === id);
     const dialogRef = this.dialog.open(RemoveCategoryDialogComponent, {
       width: '250px',
+      data: { category: categoryToBeRemoved }
     });
     const result = await firstValueFrom(dialogRef.afterClosed()); {
       if (result === true) {
@@ -79,9 +81,7 @@ export class ListCategoriesComponent {
     const dialogRef = this.dialog.open(AddCategoryDialog, {
       data: this.newCategory,
     });
-
     const result: Category = await firstValueFrom(dialogRef.afterClosed());
-
     if (result && result.name && result.name.length !== 0) {
       try {
         const res = await this.categorySvc.addCategory(result);
