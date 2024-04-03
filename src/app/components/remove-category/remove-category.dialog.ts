@@ -16,16 +16,15 @@ import { ICategoryService } from '../../abstract/icategory-service';
 })
 export class RemoveCategoryDialogComponent {
   title = 'Remove Category';
-  //to do Two-way binding for the dialog : category name 
+  //to do Two-way binding for the dialog : category name
 
   dialogRef = inject(MatDialogRef);
   data = inject(MAT_DIALOG_DATA);
   service = inject(CategoryService) as ICategoryService;
   errorMessage: string | undefined;
-  //category = this.data.category;
 
   confirmRemove(): void {
-    alert('Category has been removed');
+
     this.dialogRef.close(true);
   }
   cancel(): void {

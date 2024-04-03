@@ -55,7 +55,6 @@ export class DetailsCategoryComponent {
       try {
         await this.service.updateCategory(this.category);
         this.errorMessage = 'Category updated successfully.';
-        // window.alert('Category updated successfully.');
       } catch (error) {
         this.errorMessage = 'An error occurred while updating the category.';
         console.error(error);

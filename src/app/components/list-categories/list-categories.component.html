@@ -31,20 +31,7 @@ Loading...
         <mat-icon>edit</mat-icon>
       </button>
 
-<<<<<<< HEAD
-            <button mat-icon-button color="warn" (click)="removeCategory(category.id)">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row (click)="setActiveCategory(row, row.id)" *matRowDef="let row; columns: columns;">
-    </tr>
-</table>
-=======
-      <button mat-icon-button color="warn" (click)="removeCategory(category.id)"
-        [routerLink]="['/category', category.Id]">
+      <button mat-icon-button color="warn" (click)="removeCategory(category.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
@@ -54,4 +41,3 @@ Loading...
   <tr mat-row (click)="setActiveCategory(row, row.id)" *matRowDef="let row; columns: columns;">
   </tr>
 </table>
->>>>>>> 595c0e50dc8230ef8facc7584758dac18690baf8
