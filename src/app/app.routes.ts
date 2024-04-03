@@ -4,9 +4,9 @@ import { ListCategoriesComponent } from './components/list-categories/list-categ
 import { DetailsCategoryComponent } from './components/details-category/details-category.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'categories', component: ListCategoriesComponent },
-    { path: 'category/:id',component: DetailsCategoryComponent}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'categories', component: ListCategoriesComponent },
+  { path: 'category/:id', component: DetailsCategoryComponent }
 ];
 
