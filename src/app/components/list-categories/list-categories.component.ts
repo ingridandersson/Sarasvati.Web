@@ -11,11 +11,12 @@ import { AngularMaterialComponent } from '../../common/angular-material/angular-
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { RemoveCategoryDialogComponent } from '../remove-category/remove-category.dialog';
 
 @Component({
   selector: 'app-list-categories',
   standalone: true,
-  imports: [AngularMaterialComponent, RouterLink, MatIconModule, MatTableModule, MatButtonModule],
+  imports: [AngularMaterialComponent, RouterLink, MatIconModule, MatTableModule, MatButtonModule, RemoveCategoryDialogComponent],
   templateUrl: './list-categories.component.html',
   styleUrl: './list-categories.component.scss'
 })
@@ -56,13 +57,20 @@ export class ListCategoriesComponent {
   }
 
   async removeCategory(id: GUID): Promise<void> {
-    try {
-      const res = await this.categorySvc.deleteCategory(id);
-      console.log(res);
-      await this.refreshList();
-    } catch (e) {
-      console.error(e);
-      this.errorMessage = 'An error occurred while deleting the category. Please try again.';
+    const dialogRef = this.dialog.open(RemoveCategoryDialogComponent, {
+      width: '250px',
+    });
+    const result = await firstValueFrom(dialogRef.afterClosed()); {
+      if (result === true) {
+        try {
+          const res = await this.categorySvc.deleteCategory(id);
+          console.log(res);
+          this.dataSource.data = [...this.dataSource.data.filter(c => c.id !== id)];
+        } catch (e) {
+          console.error(e);
+          this.errorMessage = 'An error occurred while deleting the category. Please try again.';
+        }
+      }
     }
   }
 

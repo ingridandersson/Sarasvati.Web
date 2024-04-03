@@ -4,8 +4,6 @@ import { AngularMaterialComponent } from '../../common/angular-material/angular-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
-import { Category } from '../../models/category.model';
 import { ListCategoriesComponent } from '../list-categories/list-categories.component';
 import { CategoryService } from '../../services/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';

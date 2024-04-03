@@ -6,6 +6,7 @@ import { HomeComponent } from './common/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailsCategoryComponent } from './components/details-category/details-category.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
