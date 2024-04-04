@@ -1,3 +1,10 @@
+.sticky-toolbar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
 .button,
 a {
   font-size: 20px;
@@ -8,10 +15,24 @@ a {
   }
 }
 
+.home-button {
+  display: flex;
+}
+
+.image-container {
+  width: 120px;
+  height: auto;
+  border-radius: 5%;
+  overflow: visible;
+  padding-right: 5px;
+}
+
 .image-container img {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10%;
-  height: auto;
+  margin: 0 auto;
+  max-width: 120px;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
