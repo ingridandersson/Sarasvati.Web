@@ -12,11 +12,15 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RemoveCategoryDialogComponent } from '../remove-category/remove-category.dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-categories',
   standalone: true,
-  imports: [AngularMaterialComponent, RouterLink, MatIconModule, MatTableModule, MatButtonModule, RemoveCategoryDialogComponent],
+  imports: [AngularMaterialComponent, RouterLink, CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, FormsModule, MatTableModule, MatButtonModule, RemoveCategoryDialogComponent],
   templateUrl: './list-categories.component.html',
   styleUrl: './list-categories.component.scss'
 })
@@ -28,12 +32,21 @@ export class ListCategoriesComponent {
   public categories: Category[] = [];
   public newCategory: Category = {} as Category;
   public dataSource = new MatTableDataSource<Category>();
-  columns: string[] = ['id', 'name', 'visible', 'actions'];
+  columns: string[] = ['name', 'visible', 'actions'];
   errorMessage: string | undefined;
   currentIndex = -1;
+  searchTerm: string = '';
+  public filteredDataSource: MatTableDataSource<Category> = new MatTableDataSource<Category>();
 
   async ngOnInit(): Promise<void> {
     await this.fetchCategories();
+    this.filteredDataSource = new MatTableDataSource<Category>(this.categories);
+  }
+
+  filterCategories(searchTerm: string) {
+    this.filteredDataSource.data = (this.dataSource.data.filter((category: Category) =>
+      category.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    ));
   }
 
   async fetchCategories(): Promise<void> {
@@ -41,6 +54,7 @@ export class ListCategoriesComponent {
       this.categories = await this.categorySvc.getAllCategories();
       console.log(this.categories);
       this.dataSource = new MatTableDataSource(this.categories);
+      this.filteredDataSource = new MatTableDataSource(this.categories);
     } catch (error) {
       this.errorMessage = 'An error occurred while fetching categories.';
       console.error(error);
@@ -56,6 +70,25 @@ export class ListCategoriesComponent {
     this.currentIndex = index;
   }
 
+  async openDialog(): Promise<void> {
+    this.newCategory = {} as Category;
+    const dialogRef = this.dialog.open(AddCategoryDialog, {
+      data: this.newCategory,
+    });
+    const result: Category = await firstValueFrom(dialogRef.afterClosed());
+    if (result && result.name && result.name.length !== 0) {
+      try {
+        const res = await this.categorySvc.addCategory(result);
+        console.log(res);
+        this.dataSource.data = [...this.dataSource.data, res];
+        this.filteredDataSource.data = this.dataSource.data;
+      } catch (e) {
+        console.error(e);
+        this.errorMessage = 'An error occurred while adding the category. Please try again.';
+      }
+    }
+  }
+
   async removeCategory(id: GUID): Promise<void> {
     const categoryToBeRemoved = this.dataSource.data.find(c => c.id === id);
     const dialogRef = this.dialog.open(RemoveCategoryDialogComponent, {
@@ -68,28 +101,11 @@ export class ListCategoriesComponent {
           const res = await this.categorySvc.deleteCategory(id);
           console.log(res);
           this.dataSource.data = [...this.dataSource.data.filter(c => c.id !== id)];
+          this.filteredDataSource.data = this.dataSource.data;
         } catch (e) {
           console.error(e);
           this.errorMessage = 'An error occurred while deleting the category. Please try again.';
         }
-      }
-    }
-  }
-
-  async openDialog(): Promise<void> {
-    this.newCategory = {} as Category;
-    const dialogRef = this.dialog.open(AddCategoryDialog, {
-      data: this.newCategory,
-    });
-    const result: Category = await firstValueFrom(dialogRef.afterClosed());
-    if (result && result.name && result.name.length !== 0) {
-      try {
-        const res = await this.categorySvc.addCategory(result);
-        console.log(res);
-        this.dataSource.data = [...this.dataSource.data, res];
-      } catch (e) {
-        console.error(e);
-        this.errorMessage = 'An error occurred while adding the category. Please try again.';
       }
     }
   }
