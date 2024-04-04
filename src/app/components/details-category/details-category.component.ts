@@ -13,7 +13,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 
 
-
 @Component({
   selector: 'app-details-category',
   standalone: true,
@@ -27,10 +26,11 @@ export class DetailsCategoryComponent {
   errorMessage: string | undefined;
   categoryId?: GUID;
   nameControl: FormControl = new FormControl('');
+  public showEditForm = false;
+
 
   activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
-
   router = inject(Router);
 
   goBack(): void {
@@ -70,5 +70,4 @@ export class DetailsCategoryComponent {
       }
     }
   }
-  public showEditForm = false;
 }
