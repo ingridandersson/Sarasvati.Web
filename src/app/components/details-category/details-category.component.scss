@@ -30,9 +30,20 @@ h4 {
 
 .header-content {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
-  width: 30%;
+}
+
+.toggleEditForm {
+  margin-right: 50%;
+}
+
+.icon-edit {
+  color: rgb(37, 59, 155);
+}
+
+.icon-close {
+  color: red;
 }
 
 .accent {

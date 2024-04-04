@@ -21,13 +21,14 @@ Loading...
           <h2>{{ category.name }}</h2>
           <h4>(ID: {{ categoryId }})</h4>
         </div>
-        <button mat-icon-button (click)="toggleEditForm()">
-          <mat-icon>edit</mat-icon>
+        <button class="toggleEditForm" mat-icon-button (click)="toggleEditForm()">
+          <mat-icon [class.icon-edit]="!showEditForm" [class.icon-close]="showEditForm">
+            {{ showEditForm ? 'close' : 'edit' }}
+          </mat-icon>
         </button>
       </div>
     </td>
   </ng-container>
-
   @if (showEditForm){
   <ng-container matColumnDef="editCategory">
     <tr mat-row *matRowDef="let row; columns: ['editCategory'];"></tr>
