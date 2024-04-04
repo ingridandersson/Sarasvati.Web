@@ -1,8 +1,13 @@
 <header>
-    <mat-toolbar color="primary">
-        <button class="button" mat-icon-button [routerLink]="['/']">
-            <mat-icon> home </mat-icon>
-        </button>
-        <a mat-flat-button color="primary" [routerLink]="['/categories']"> Categories </a>
-    </mat-toolbar>
+  <mat-toolbar color="primary" class="sticky-toolbar">
+    <button class="button" mat-icon-button [routerLink]="['/']">
+      <mat-icon> home </mat-icon>
+    </button>
+    <button class="button" mat-icon-button [routerLink]="['/']">
+      <mat-icon> Login </mat-icon>
+    </button>
+    <a mat-flat-button color="primary" [routerLink]="['/categories']"> Categories </a>
+    <a mat-flat-button color="primary" [routerLink]="['/auth']"> auth </a>
+
+  </mat-toolbar>
 </header>

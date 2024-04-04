@@ -1,0 +1,54 @@
+.auth-container {
+  margin-top: 5em;
+
+}
+
+
+
+.signup-container,
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-title {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  font-size: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.signup-button,
+.login-button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.login-text,
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+a {
+  color: #303f9f;
+  text-decoration: underline;
+}

@@ -1,7 +1,16 @@
-.button, a{
+.button,
+a {
   font-size: 20px;
   cursor: pointer;
-    &:hover{
+
+  &:hover {
     background-color: rgb(99, 131, 235);
+  }
 }
+
+.sticky-toolbar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
 }
