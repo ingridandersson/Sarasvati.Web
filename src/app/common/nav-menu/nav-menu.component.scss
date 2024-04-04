@@ -1,7 +1,17 @@
-.button, a{
+.button,
+a {
   font-size: 20px;
   cursor: pointer;
-    &:hover{
+
+  &:hover {
     background-color: rgb(99, 131, 235);
+  }
 }
+
+.image-container img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  height: auto;
 }
