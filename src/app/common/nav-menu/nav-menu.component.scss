@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+.sticky-toolbar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+>>>>>>> 211583997e3d7191f5e6e00a2b51f2dbc40b58b3
 .button,
 a {
   font-size: 20px;
@@ -8,9 +18,32 @@ a {
   }
 }
 
+<<<<<<< HEAD
 .sticky-toolbar {
   display: flex;
   position: fixed;
   top: 0;
   z-index: 1000;
+=======
+.home-button {
+  display: flex;
+}
+
+.image-container {
+  width: 120px;
+  height: auto;
+  border-radius: 5%;
+  overflow: visible;
+  padding-right: 5px;
+}
+
+.image-container img {
+  display: flex;
+  margin: 0 auto;
+  max-width: 120px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+>>>>>>> 211583997e3d7191f5e6e00a2b51f2dbc40b58b3
 }

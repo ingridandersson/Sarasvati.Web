@@ -13,5 +13,4 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './nav-menu.component.scss'
 })
 export class NavMenuComponent {
-
 }

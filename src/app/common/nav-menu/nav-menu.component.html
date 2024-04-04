@@ -1,4 +1,5 @@
 <header>
+<<<<<<< HEAD
   <mat-toolbar color="primary" class="sticky-toolbar">
     <button class="button" mat-icon-button [routerLink]="['/']">
       <mat-icon> home </mat-icon>
@@ -10,4 +11,17 @@
     <a mat-flat-button color="primary" [routerLink]="['/auth']"> auth </a>
 
   </mat-toolbar>
+=======
+    <mat-toolbar class="sticky-toolbar" color="primary">
+        <a class="home-button" [routerLink]="['/']">
+            <a class="image-container">
+                <img src="assets/SarasvatiLogo.png" alt="SarasvatiLogo">
+            </a>
+        </a>
+        <a mat-flat-button color="primary" [routerLink]="['/categories']"> Categories </a>
+        <span class="spacer"></span>
+        <a mat-flat-button color="primary" [routerLink]="['/auth']">Log in</a>
+    </mat-toolbar>
+
+>>>>>>> 211583997e3d7191f5e6e00a2b51f2dbc40b58b3
 </header>
