@@ -1,19 +1,22 @@
-<h1 id="tableLabel">{{title}}</h1>
+<div class="sticky-header">
 
-<mat-form-field class="form-field">
-  <input matInput [(ngModel)]="searchTerm" placeholder="Search..." (keyup)="filterCategories(searchTerm)">
-  <mat-icon matSuffix class="search-icon">search</mat-icon>
-</mat-form-field>
 
-@if (!categories) {
-Loading...
-}
+  <h1 id="tableLabel">{{title}}</h1>
 
-<button mat-icon-button color="primary" class="btn-add" (click)="openDialog()">
-  <mat-icon>add</mat-icon>
-</button>
+  <mat-form-field class="form-field">
+    <input matInput [(ngModel)]="searchTerm" placeholder="Search..." (keyup)="filterCategories(searchTerm)">
+    <mat-icon matSuffix class="search-icon">search</mat-icon>
+  </mat-form-field>
 
-<table mat-table [dataSource]="filteredDataSource" class="mat-elevation-z8">
+  @if (!categories) {
+  Loading...
+  }
+
+  <button mat-icon-button color="primary" class="btn-add" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<table mat-table [dataSource]="filteredDataSource" class="mat-elevation">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let category">

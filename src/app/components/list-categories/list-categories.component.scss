@@ -1,3 +1,13 @@
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
 mat-form-field {
   display: block;
   margin: 10px 0;
