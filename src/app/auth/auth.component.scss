@@ -1,16 +1,17 @@
 .auth-container {
-  margin-top: 5em;
-
+  margin-top: 10em;
 }
-
-
 
 .signup-container,
 .login-container {
-  max-width: 400px;
   margin: auto;
   padding: 20px;
   font-family: 'Roboto', sans-serif;
+  max-width: 350px;
+  min-height: 150px;
+  margin-top: 6em;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 25px;
 }
 
 .form-title {
@@ -45,8 +46,6 @@ mat-form-field {
   text-align: center;
   margin-top: 20px;
 }
-
-
 
 a {
   color: #303f9f;

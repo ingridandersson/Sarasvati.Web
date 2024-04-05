@@ -18,6 +18,6 @@ export class AuthComponent {
 
   toggleForm(formType: string) {
     this.activeForm = formType;
-  }
 
+  }
 }

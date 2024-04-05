@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'categories', component: ListCategoriesComponent },
   { path: 'category/:id', component: DetailsCategoryComponent },
-  { path: 'auth', component: AuthComponent },
+  { path: 'auth', component: AuthComponent }
 ];
 
