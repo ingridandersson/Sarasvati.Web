@@ -23,12 +23,30 @@
 .tab-buttons {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px 4px #e9e9ec;
 }
 
 .tab-button {
   font-size: 16px;
+  padding: 15px;
+  font-size: 20px;
+  width: 50%;
+  text-align: center;
+  transition: .2s ease;
+  border-radius: 15px;
+
 }
+
+.tab-button.active {
+  background-color: var(--main-color);
+  color: white;
+
+}
+
+
 
 mat-form-field {
   width: 100%;
