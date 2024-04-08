@@ -4,6 +4,6 @@ import { LoginRequest } from "../models/auth/login.request.model";
 
 
 export interface IAuthService {
-    login(email: string, password: string): Promise<LoginRequest>;
-    register(email: string, password: string): Promise<LoginRequest>;
+  login(email: string, password: string): Promise<LoginRequest>;
+  register(email: string, password: string): Promise<LoginRequest>;
 }
