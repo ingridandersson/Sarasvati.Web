@@ -1,25 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthApiService } from '../../services/auth/auth.api.service';
-// import { LoginRequest } from '../../models/auth/login.request.model';
-// import { LoginResponse } from '../../models/auth/login.response.model';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [MatIconModule, MatInputModule, MatButtonModule, CommonModule, MatFormFieldModule, FormsModule],
+  imports: [MatIconModule, MatInputModule, MatButtonModule, CommonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
-
 export class AuthComponent {
   activeForm: string = 'login';
-  //authApiSvc: AuthApiService;
+  signupForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    ConfirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
+  });
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
+
 
   toggleForm(formType: string) {
     this.activeForm = formType;
@@ -48,11 +53,4 @@ export class AuthComponent {
     }
   }
 
-  // login() {
-  //   this.authApiSvc.login().subscribe(response => {
-  //     const jwt = response.jwt;
-  //     localStorage.setItem('jwt', jwt); // Don't do this in production
-  //   });
-  //   // this.authApiSvc.login(new LoginRequest());
-  // }
 }
