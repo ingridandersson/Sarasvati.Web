@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
-import { GUID } from '../models/guid.model';
-import { environment } from './environments/environment.local';
+import { Category } from '../../models/category/category.model';
+import { GUID } from '../../models/guid.model';
+import { environment } from '../environments/environment.local';
 
 @Injectable({
   providedIn: 'root'

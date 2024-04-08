@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../../models/category.model';
+import { Category } from '../../models/category/category.model';
 import { Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 

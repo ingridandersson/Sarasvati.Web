@@ -1,4 +1,4 @@
-import { GUID } from './guid.model';
+import { GUID } from '../guid.model';
 
 export class Category {
     id?: GUID;

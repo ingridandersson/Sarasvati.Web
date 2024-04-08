@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { Category } from '../../models/category.model';
+import { Category } from '../../models/category/category.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '../../services/category/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';
 import { GUID, guid } from '../../models/guid.model';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ export class DetailsCategoryComponent {
   categoryId?: GUID;
   nameControl: FormControl = new FormControl('');
   public showEditForm = false;
-
+  public showDescription = false;
 
   activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
@@ -69,5 +69,10 @@ export class DetailsCategoryComponent {
         console.error(error);
       }
     }
+  }
+
+  toggleShowDescription(): void {
+    this.showDescription = !this.showDescription;
+    console.log("Show Description: ", this.showDescription);
   }
 }

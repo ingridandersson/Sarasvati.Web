@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ListCategoriesComponent } from '../list-categories/list-categories.component';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '../../services/category/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';
 import { MatButtonModule } from '@angular/material/button';
 

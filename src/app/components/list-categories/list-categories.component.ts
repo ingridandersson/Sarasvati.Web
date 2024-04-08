@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Category } from '../../models/category.model';
-import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category/category.model';
+import { CategoryService } from '../../services/category/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';

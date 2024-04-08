@@ -1,4 +1,4 @@
-import { Category } from "../models/category.model";
+import { Category } from "../models/category/category.model";
 import { GUID } from "../models/guid.model";
 
 export interface ICategoryService {

@@ -47,3 +47,16 @@ Loading...
   }
 </table>
 }
+
+<!---->
+<div>
+  <h2>Description</h2>
+  <p class="toggleDescription" (click)="toggleShowDescription()">show...
+    {{ showDescription ? 'less' : 'more' }}
+  </p>
+  @if(showDescription){
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi?</p>
+  }
+</div>

@@ -1,9 +1,9 @@
 import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { ICategoryService } from '../abstract/icategory-service';
-import { Category } from '../models/category.model';
+import { ICategoryService } from '../../abstract/icategory-service';
+import { Category } from '../../models/category/category.model';
 import { ApiService } from './api.service';
 import { Injectable, inject } from '@angular/core';
-import { GUID } from '../models/guid.model';
+import { GUID } from '../../models/guid.model';
 
 @Injectable({
   providedIn: 'root'

@@ -5,7 +5,7 @@
     <div class="login-container">
       <div class="tab-buttons">
         <button mat-button class="tab-button" (click)="toggleForm('login')">Login</button>
-        <button mat-button class="tab-button" (click)="toggleForm('signup')">Sig nup</button>
+        <button mat-button class="tab-button" (click)="toggleForm('signup')">Sign up</button>
       </div>
       <form>
         <mat-form-field appearance="fill">
@@ -25,7 +25,7 @@
   }
 
   <!-- Signup form fields -->
-  @if( activeForm === 'signup'){
+  @if(activeForm === 'signup'){
   <form>
     <div class="signup-container">
       <div class="tab-buttons">
