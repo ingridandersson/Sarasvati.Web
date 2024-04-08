@@ -1,18 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../services/auth/auth.service';
+import { IAuthService } from '../../abstract/iauth-service';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [MatIconModule, MatInputModule, MatButtonModule, CommonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule],
+  imports: [MatIconModule, MatInputModule, MatButtonModule, CommonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, AuthService],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
+
 export class AuthComponent {
   activeForm: string = 'login';
   signupForm = new FormGroup({
@@ -24,6 +27,7 @@ export class AuthComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
+  authService = Inject(AuthService) as IAuthService;
 
 
   toggleForm(formType: string) {
