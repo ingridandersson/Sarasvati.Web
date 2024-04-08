@@ -4,19 +4,22 @@
   <form>
     <div class="login-container">
       <div class="tab-buttons">
-        <button mat-button class="tab-button" (click)="toggleForm('login')">Login</button>
+        <button mat-button class="tab-button" [ngClass]="{'active': activeForm === 'login'}"
+          (click)="toggleForm('login')">Login</button>
         <button mat-button class="tab-button" (click)="toggleForm('signup')">Sign up</button>
       </div>
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Email Address</mat-label>
-          <input matInput type="email" placeholder="Your Email" required>
+          <input matInput formControlName="email" type="email" placeholder="Enter your email" required>
+
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password" required minlength="6">
+          <input matInput formControlName="password" type="password" placeholder=" Enter your password" required>
+
         </mat-form-field>
-        <button mat-raised-button color="primary" class="login-button">Login</button>
+        <button mat-raised-button color="primary" class="login-button" type="submit">Login</button>
       </form>
       <p class="signup-text">Don't have an account? <a href=""
           (click)="toggleForm('signup'); $event.preventDefault();">Sign up here</a></p>
@@ -32,23 +35,26 @@
         <button mat-button class="tab-button" (click)="toggleForm('login')">Login</button>
         <button mat-button class="tab-button" (click)="toggleForm('signup')">Sign up</button>
       </div>
-      <form>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Email Address</mat-label>
-          <input matInput type="email" placeholder="Your Email" required>
+          <input matInput formControlName="email" type="email" placeholder="Enter your email" required>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password" required minlength="6">
+          <input matInput formControlName="password" type="password" placeholder="Enter your password" required
+            minlength="6">
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Confirm Password</mat-label>
-          <input matInput type="password" placeholder="Confirm Password" required minlength="8">
+          <input matInput formControlName="ConfirmPassword" type="password" placeholder="Confirm Password" required
+            minlength="8">
         </mat-form-field>
-        <button mat-raised-button color="primary" class="signup-button">Sign Up</button>
+        <button mat-raised-button color="primary" class="signup-button" type="submit">Sign Up</button>
       </form>
       <p class="signup-text">Already have an account? <a href="#"
           (click)="toggleForm('login'); $event.preventDefault();">Login here</a></p>
+
     </div>
   </form>
   }
