@@ -24,4 +24,9 @@ export class AuthService {
     // async login(email: string, password: string): Promise<LoginResponse> {
     //     return await firstValueFrom(this.apiSvc.login(email, password));
     // }
+
+    isAuthenticated(): boolean {
+        const token = localStorage.getItem('token');
+        return !!token; // Converts the token to a boolean to indicate if authenticated
+    }
 }
