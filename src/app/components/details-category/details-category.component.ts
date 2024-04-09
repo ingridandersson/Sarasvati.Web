@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class DetailsCategoryComponent {
   activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
   router = inject(Router);
+  authService = inject(AuthService);
 
   goBack(): void {
     this.router.navigate(['categories']);
@@ -54,6 +56,10 @@ export class DetailsCategoryComponent {
   }
 
   toggleEditForm(): void {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
     this.showEditForm = !this.showEditForm;
     console.log("Show Edit Form: ", this.showEditForm);
   }

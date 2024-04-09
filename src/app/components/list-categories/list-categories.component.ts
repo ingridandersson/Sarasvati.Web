@@ -8,7 +8,7 @@ import { GUID } from '../../models/guid.model';
 import { AddCategoryDialog } from '../add-category/add-category.dialog';
 import { firstValueFrom } from 'rxjs';
 import { AngularMaterialComponent } from '../../common/angular-material/angular-material.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RemoveCategoryDialogComponent } from '../remove-category/remove-category.dialog';
@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-list-categories',
@@ -28,6 +29,9 @@ export class ListCategoriesComponent {
   title = 'List of Categories';
   categorySvc = inject(CategoryService) as ICategoryService;
   dialog = inject(MatDialog);
+  authService = inject(AuthService);
+  router = inject(Router);
+
 
   public categories: Category[] = [];
   public newCategory: Category = {} as Category;
@@ -71,6 +75,10 @@ export class ListCategoriesComponent {
   }
 
   async openDialog(): Promise<void> {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
     this.newCategory = {} as Category;
     const dialogRef = this.dialog.open(AddCategoryDialog, {
       data: this.newCategory,
@@ -90,6 +98,10 @@ export class ListCategoriesComponent {
   }
 
   async removeCategory(id: GUID): Promise<void> {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
     const categoryToBeRemoved = this.dataSource.data.find(c => c.id === id);
     const dialogRef = this.dialog.open(RemoveCategoryDialogComponent, {
       width: '250px',

@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "../environments/environment.local";
-import { Observable, firstValueFrom } from "rxjs";
-import { LoginRequest, RegisterRequest } from "../../models/auth/login.request.model";
+import { Observable } from "rxjs";
+import { LoginRequest } from "../../models/auth/login.request.model";
 import { LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
 
 @Injectable({
@@ -10,24 +10,22 @@ import { LoginResponse, RegisterResponse } from "../../models/auth/login.respons
 })
 export class AuthApiService {
   private http = inject(HttpClient);
-  private authUrl: string = environment.baseUrl + 'api/auth';
-  private baseUrl = 'https://localhost:5001/api/auth';
+  private authUrl: string = environment.baseUrl + 'auth';
+  // private baseUrl = 'https://localhost:5001/api/auth';
 
 
   login(login: LoginRequest): Observable<LoginResponse> {
-    const url = `${this.authUrl}/login`;
+    const url = `${this.authUrl}/users/login`;
     return this.http.post<LoginResponse>(url, login);
   }
 
   register(login: LoginRequest): Observable<RegisterResponse> {
-    const url = `${this.authUrl}/register`;
-    const body: RegisterRequest = { email: login.email, password: login.password, confirmPassword: login.password };
-    return this.http.post<RegisterResponse>(url, body);
+    const url = `${this.authUrl}/users/register`;
+    return this.http.post<RegisterResponse>(url, login);
   }
 
-
   logout(logout: any): Observable<any> {
-    const url = this.authUrl + '/logout';
+    const url = this.authUrl + '/users/logout';
     return this.http.post(url, this.logout);
   }
 

@@ -5,58 +5,87 @@
   <h1 id="tableLabel">{{ title }}</h1>
 </div>
 
-@if(!category)
-{
-Loading...
-}
 
-@if(category)
-{
-<table mat-table [dataSource]="[category]" class="mat-elevation-z8">
-  <ng-container matColumnDef="header">
-    <tr mat-header-row *matHeaderRowDef="['header']"></tr>
-    <td class="space" mat-header-cell *matHeaderCellDef colspan="2">
-      <div class="header-content">
-        <div class="category-info">
-          <h2>{{ category.name }}</h2>
-        </div>
-        <button class="toggleEditForm" mat-icon-button (click)="toggleEditForm()">
-          <mat-icon [class.icon-edit]="!showEditForm" [class.icon-close]="showEditForm">
-            {{ showEditForm ? 'close' : 'edit' }}
-          </mat-icon>
-        </button>
-      </div>
-    </td>
-  </ng-container>
-  @if (showEditForm){
-  <ng-container matColumnDef="editCategory">
-    <tr mat-row *matRowDef="let row; columns: ['editCategory'];"></tr>
-    <td mat-cell *matCellDef="let category">
-      <form>
-        <mat-form-field>
-          <mat-label for="categoryName">Category</mat-label>
-          <input matInput id="categoryName" [formControl]="nameControl">
-        </mat-form-field>
-        <div class="buttons">
-          <button mat-raised-button color="primary" class="primary" (click)="save()">Save</button>
-          <button mat-raised-button color="accent" class="accent" (click)="toggleEditForm()">Cancel</button>
-        </div>
-      </form>
-    </td>
-  </ng-container>
+<div class="description-container">
+  @if(!category)
+  {
+  Loading...
   }
-</table>
-}
 
-<!---->
-<div>
-  <h2>Description</h2>
+  @if(category)
+  {
+  <table mat-table [dataSource]="[category]" class="mat-elevation-z8">
+    <ng-container matColumnDef="header">
+      <tr mat-header-row *matHeaderRowDef="['header']"></tr>
+      <td class="space" mat-header-cell *matHeaderCellDef colspan="2">
+        <div class="header-content">
+          <div class="category-info">
+            <h2>{{ category.name }}</h2>
+          </div>
+          <button class="toggleEditForm" mat-icon-button (click)="toggleEditForm()">
+            <mat-icon [class.icon-edit]="!showEditForm" [class.icon-close]="showEditForm">
+              {{ showEditForm ? 'close' : 'edit' }}
+            </mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    @if (showEditForm){
+    <ng-container matColumnDef="editCategory">
+      <tr mat-row *matRowDef="let row; columns: ['editCategory'];"></tr>
+      <td mat-cell *matCellDef="let category">
+        <form>
+          <mat-form-field>
+            <mat-label for="categoryName">Category</mat-label>
+            <input matInput id="categoryName" [formControl]="nameControl">
+          </mat-form-field>
+          <div class="buttons">
+            <button mat-raised-button color="primary" class="primary" (click)="save()">Save</button>
+            <button mat-raised-button color="accent" class="accent" (click)="toggleEditForm()">Cancel</button>
+          </div>
+        </form>
+      </td>
+    </ng-container>
+    }
+  </table>
+
+  }
+  <h2 class="h2">Description</h2>
   <p class="toggleDescription" (click)="toggleShowDescription()">show...
     {{ showDescription ? 'less' : 'more' }}
   </p>
   @if(showDescription){
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
     accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
-    sequi?</p>
+    sequi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente repudiandae accusantium rem
+    accusamus itaque a dolor iusto nobis, sint, nemo deleniti natus eveniet est, nulla facere ratione quis minima
+    sequi</p>
   }
 </div>
+
+<!---->
