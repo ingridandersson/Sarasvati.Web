@@ -15,3 +15,11 @@ export class RegisterResponse {
   jwtToken!: string;
   refreshToken!: string;
 }
+
+export class AcknowledgeResponse {
+  email: string;
+
+  constructor(email: string) {
+    this.email = email;
+  }
+}

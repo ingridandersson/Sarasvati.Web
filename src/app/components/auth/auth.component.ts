@@ -77,24 +77,6 @@ export class AuthComponent {
         }
       }
     }
-    // async onSubmit() {
-    //   console.log("Submit!");
-    //   if (this.isLoginMode) {
-    //     console.log('Login mode');
-    //     if (this.loginForm.valid) {
-    //       const loginRequest: LoginRequest = {
-    //         email: this.loginForm.value.email as string,
-    //         password: this.loginForm.value.password as string,
-    //       };
-    //       try {
-    //         const response = await this.authService.login(loginRequest);
-    //         console.log('User logged in successfully', response);
-    //         this.router.navigate(['/categories']);
-    //       } catch (error) {
-    //         console.error('Login Error', error);
-    //       }
-    //     }
-    //   }
     else {
       console.log('Signup mode');
       if (this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword) {
