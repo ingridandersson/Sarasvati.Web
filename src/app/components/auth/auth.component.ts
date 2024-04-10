@@ -9,8 +9,6 @@ import { AuthService } from '../../services/auth/auth.service';
 import { LoginRequest } from '../../models/auth/login.request.model';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-auth',
   standalone: true,
@@ -59,6 +57,7 @@ export class AuthComponent {
     }
   }
 
+
   async onSubmit() {
     console.log("Submit!");
     if (this.isLoginMode) {
@@ -74,28 +73,95 @@ export class AuthComponent {
           this.router.navigate(['/categories']);
         } catch (error) {
           console.error('Login Error', error);
+          // Här kan du lägga till mer användarvänlig felhantering
         }
       }
-    } else {
+    }
+    // async onSubmit() {
+    //   console.log("Submit!");
+    //   if (this.isLoginMode) {
+    //     console.log('Login mode');
+    //     if (this.loginForm.valid) {
+    //       const loginRequest: LoginRequest = {
+    //         email: this.loginForm.value.email as string,
+    //         password: this.loginForm.value.password as string,
+    //       };
+    //       try {
+    //         const response = await this.authService.login(loginRequest);
+    //         console.log('User logged in successfully', response);
+    //         this.router.navigate(['/categories']);
+    //       } catch (error) {
+    //         console.error('Login Error', error);
+    //       }
+    //     }
+    //   }
+    else {
       console.log('Signup mode');
       if (this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword) {
-        const { confirmPassword, ...loginRequest } = this.signupForm.value;
         try {
-          const response = await this.authService.register({
-            email: loginRequest.email || '', // Ensure email is always of type string
-            password: loginRequest.password || '', // Ensure password is always of type string
-          });
+          const response = await this.authService.register(
+            this.signupForm.value.email as string,
+            this.signupForm.value.password as string,
+            this.signupForm.value.confirmPassword as string
+          );
           console.log('User registered successfully', response);
-          // Valfritt: Logga in användaren direkt efter registrering eller navigera till inloggningssidan
           this.router.navigate(['/categories']);
+          // Eller om du vill logga in användaren direkt efter registrering,
+          // kan du kalla på login-metoden här istället och sedan navigera.
         } catch (error) {
           console.error('Registration Error', error);
+          // Här kan du lägga till mer användarvänlig felhantering
         }
       } else {
         console.log('Form is not valid or passwords do not match');
+        // Här kan du informera användaren om att formuläret inte är giltigt
+        // eller att lösenorden inte matchar
       }
     }
   }
+
+
+
+  ////detta är originalet
+  // async onSubmit() {
+  //   console.log("Submit!");
+  //   if (this.isLoginMode) {
+  //     console.log('Login mode');
+  //     if (this.loginForm.valid) {
+  //       const loginRequest: LoginRequest = {
+  //         email: this.loginForm.value.email as string,
+  //         password: this.loginForm.value.password as string,
+  //       };
+  //       try {
+  //         const response = await this.authService.login(loginRequest);
+  //         console.log('User logged in successfully', response);
+  //         this.router.navigate(['/categories']);
+  //       } catch (error) {
+  //         console.error('Login Error', error);
+  //       }
+  //     }
+  //   } else {
+  //     console.log('Signup mode');
+  //     if (this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword) {
+  //       const { confirmPassword, ...loginRequest } = this.signupForm.value;
+  //       try {
+  //         const response = await this.authService.register({
+  //           email: loginRequest.email || '', // Ensure email is always of type string
+  //           password: loginRequest.password || '', // Ensure password is always of type string
+  //         });
+  //         console.log('User registered successfully', response);
+  //         // Valfritt: Logga in användaren direkt efter registrering eller navigera till inloggningssidan
+  //         this.router.navigate(['/categories']);
+  //       } catch (error) {
+  //         console.error('Registration Error', error);
+  //       }
+  //     } else {
+  //       console.log('Form is not valid or passwords do not match');
+  //     }
+  //   }
+  // }
+
+
   // async onSubmit() {
   //   console.log("Submit!");
   //   try {

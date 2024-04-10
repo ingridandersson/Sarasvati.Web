@@ -11,7 +11,7 @@ import { LoginResponse, RegisterResponse } from "../../models/auth/login.respons
 export class AuthApiService {
   private http = inject(HttpClient);
   private authUrl: string = environment.baseUrl + 'auth';
-  // private baseUrl = 'https://localhost:5001/api/auth';
+
 
 
   login(login: LoginRequest): Observable<LoginResponse> {
