@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "../environments/environment.local";
-import { Observable } from "rxjs";
+import { Observable, firstValueFrom } from "rxjs";
 import { LoginRequest } from "../../models/auth/login.request.model";
 import { LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
 
@@ -24,6 +24,9 @@ export class AuthApiService {
     return this.http.post<RegisterResponse>(url, login);
   }
 
+
+
+
   logout(logout: any): Observable<any> {
     const url = this.authUrl + '/users/logout';
     return this.http.post(url, this.logout);
@@ -31,29 +34,11 @@ export class AuthApiService {
 
 
 
-  // login(username: string, password: string): Observable<any> {
-  //     const url = this.authUrl + '/login';
-  //     return this.http.post(url, { username, password });
-  // }
 
-  // register(username: string, password: string) {
-  //     const url = this.authUrl + '/register';
-  //     return this.http.post(url, { username, password });
-  // }
 
   // resetPassword(username: string) {
   //     const url = this.authUrl + '/reset-password';
   //     return this.http.post(url, { username });
-  // }
-
-  // acknowledgeNewUser(username: string, token: string) {
-  //     const url = this.authUrl + '/acknowledge';
-  //     return this.http.get(url, { username, token });
-  // }
-
-  // acknowledgeNewPassword(username: string, token: string) {
-  //     const url = this.authUrl + '/acknowledge';
-  //     return this.http.get(url, { username, token });
   // }
 
   // getUsers() {

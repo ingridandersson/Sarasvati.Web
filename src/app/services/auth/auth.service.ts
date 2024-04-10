@@ -22,9 +22,7 @@ export class AuthService {
     const registerRequest = { email, password, confirmPassword }; // Matchar backend förväntan
     return await firstValueFrom(this.apiSvc.register(registerRequest));
   }
-  // public async register(login: LoginRequest): Promise<LoginResponse> {
-  //   return await firstValueFrom(this.apiSvc.register(login));
-  // }
+
 
   async logout(): Promise<void> {
     localStorage.removeItem('jwtToken');

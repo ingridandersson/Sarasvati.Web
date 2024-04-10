@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivateFn } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
