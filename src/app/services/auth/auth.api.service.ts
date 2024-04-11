@@ -1,9 +1,9 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "../environments/environment.local";
-import { Observable, firstValueFrom } from "rxjs";
+import { Observable } from "rxjs";
 import { LoginRequest } from "../../models/auth/login.request.model";
-import { LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
+import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,13 @@ export class AuthApiService {
   private http = inject(HttpClient);
   private authUrl: string = environment.baseUrl + 'auth';
 
-
+  // login(login: LoginRequest): Observable<LoginResponse> {
+  //   const url = `${this.authUrl}/users/login`;
+  //   return this.http.post<LoginResponse>(url, login);
+  // }
 
   login(login: LoginRequest): Observable<LoginResponse> {
-    const url = `${this.authUrl}/users/login`;
-    return this.http.post<LoginResponse>(url, login);
+    return this.http.post<LoginResponse>(`${this.authUrl}/login`, login);
   }
 
   register(login: LoginRequest): Observable<RegisterResponse> {
@@ -24,17 +26,15 @@ export class AuthApiService {
     return this.http.post<RegisterResponse>(url, login);
   }
 
-
-
-
-  logout(logout: any): Observable<any> {
-    const url = this.authUrl + '/users/logout';
-    return this.http.post(url, this.logout);
+  acknowledgeUser(token: RegisterResponse): Observable<AcknowledgeResponse> {
+    const url = `${this.authUrl}/users/acknowledge`;
+    return this.http.get<AcknowledgeResponse>(token.url);
   }
 
-
-
-
+  // logout(logout: any): Observable<any> {
+  //   const url = this.authUrl + '/users/logout';
+  //   return this.http.post(url, this.logout);
+  // }
 
   // resetPassword(username: string) {
   //     const url = this.authUrl + '/reset-password';

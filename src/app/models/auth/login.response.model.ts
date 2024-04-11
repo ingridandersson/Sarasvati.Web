@@ -5,21 +5,23 @@ export class LoginResponse {
   roles!: string[];
   jwtToken!: string;
   refreshToken!: string;
-  //token: any;  //to test 
+  token!: string;
 }
 
 export class RegisterResponse {
-  guid!: string;
-  username!: string;
-  roles!: string[];
-  jwtToken!: string;
-  refreshToken!: string;
+  // guid!: string;
+  // email!: string;
+  // roles!: string[];
+  // jwtToken!: string;
+  // refreshToken!: string;
+  //token!: string;
+  url!: string;
 }
 
 export class AcknowledgeResponse {
-  email: string;
+  token!: string;
 
-  constructor(email: string) {
-    this.email = email;
+  constructor(token: string) {
+    this.token = token;
   }
 }

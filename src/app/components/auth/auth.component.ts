@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,19 +31,12 @@ export class AuthComponent {
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  isLoginMode: boolean = true; // Kontrollerar vilket formulär som visas
-
-  // authService = Inject(AuthService) as IAuthService;
-
-  // constructor(private authService: AuthService) { }
-  // router = inject(Router);
-
+  isLoginMode: boolean = true;
 
   constructor(
     private authService: AuthService,
     private router: Router,
   ) { }
-
 
   toggleForm(formType: string) {
     this.activeForm = formType;
@@ -53,10 +46,8 @@ export class AuthComponent {
     }
     else {
       this.router.navigate(['/auth/register']);
-
     }
   }
-
 
   async onSubmit() {
     console.log("Submit!");
@@ -73,7 +64,6 @@ export class AuthComponent {
           this.router.navigate(['/categories']);
         } catch (error) {
           console.error('Login Error', error);
-          // Här kan du lägga till mer användarvänlig felhantering
         }
       }
     }
@@ -88,17 +78,16 @@ export class AuthComponent {
           );
           console.log('User registered successfully', response);
 
-          this.router.navigate(['/categories']);
-          // Eller om du vill logga in användaren direkt efter registrering,
-          // kan du kalla på login-metoden här istället och sedan navigera.
+          if (response) {
+            await this.authService.acknowledgeNewUser(response);
+            console.log('Account confirmed successfully');
+            this.router.navigate(['/categories']);
+          }
         } catch (error) {
           console.error('Registration Error', error);
-          // Här kan du lägga till mer användarvänlig felhantering
         }
       } else {
         console.log('Form is not valid or passwords do not match');
-        // Här kan du informera användaren om att formuläret inte är giltigt
-        // eller att lösenorden inte matchar
       }
     }
   }
