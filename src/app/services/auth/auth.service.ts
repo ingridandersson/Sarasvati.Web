@@ -9,24 +9,47 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class AuthService {
-  apiSvc = inject(AuthApiService);
-  httpClient = inject(HttpClient);
+
+  apiSvc = inject(AuthApiService)
+  httpClient = inject(HttpClient)
+
+  getAuthToken(): string | null {
+    const token = localStorage.getItem('access_token');
+    console.log('Retrieved token:', token);
+    return token;
+  }
+  isAuthenticated(): boolean {
+    const token = this.getAuthToken();
+    console.log('Checking authentication status with token:', token);
+    return !!token;  // Returnerar true om en token finns, annars false
+  }
+
 
   // async login(login: LoginRequest): Promise<LoginResponse> {
   //   return await firstValueFrom(this.apiSvc.login(login));
   // }
 
+  // getAuthToken(): string | null {
+  //   return localStorage.getItem('access_token');
+  // }
+
+  // async login(loginRequest: LoginRequest): Promise<LoginResponse> {
+  //   const response = await firstValueFrom(this.apiSvc.login(loginRequest));
+  //   return response;
+  // }
+
 
   async login(loginRequest: LoginRequest): Promise<LoginResponse> {
     const response = await firstValueFrom(this.apiSvc.login(loginRequest));
-    if (response.token) {
-      localStorage.setItem('access_token', response.token);
+
+    if (response && response.jwtToken) {
+      localStorage.setItem('access_token', response.jwtToken);
+      console.log('Token saved:', response.jwtToken);
+    } else {
+      console.log('No token received:', response);
     }
     return response;
-  }
 
-  getAuthToken(): string | null {
-    return localStorage.getItem('access_token');
   }
 
   public async register(email: string, password: string, confirmPassword: string): Promise<RegisterResponse> {
@@ -35,28 +58,12 @@ export class AuthService {
   }
 
   async acknowledgeNewUser(token: RegisterResponse): Promise<AcknowledgeResponse> {
-    const response = await firstValueFrom(this.apiSvc.acknowledgeUser(token));
-    return new AcknowledgeResponse(response.token);
+    return await firstValueFrom(this.apiSvc.acknowledgeUser(token));
   }
 
   async logout(): Promise<void> {
     localStorage.removeItem('jwtToken');
   }
 
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token;
-  }
 }
 
-
-// async login(loginRequest: LoginRequest): Promise<LoginResponse> {
-//   const response = await firstValueFrom(this.httpClient.post<LoginResponse>(`${this.apiUrl}/login`, loginRequest));
-//   if (response && response.token) {
-//     localStorage.setItem('access_token', response.token);
-//   }
-//   return response;
-// }
-// getAuthToken(): string | null {
-//   return localStorage.getItem('access_token');
-// }

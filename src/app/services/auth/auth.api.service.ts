@@ -9,17 +9,20 @@ import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../mode
   providedIn: 'root'
 })
 export class AuthApiService {
+
   private http = inject(HttpClient);
   private authUrl: string = environment.baseUrl + 'auth';
 
-  // login(login: LoginRequest): Observable<LoginResponse> {
-  //   const url = `${this.authUrl}/users/login`;
-  //   return this.http.post<LoginResponse>(url, login);
-  // }
+
 
   login(login: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.authUrl}/login`, login);
+    const url = `${this.authUrl}/users/login`;
+    return this.http.post<LoginResponse>(url, login);
   }
+
+  // login(login: LoginRequest): Observable<LoginResponse> {
+  //   return this.http.post<LoginResponse>(`${this.authUrl}/login`, login);
+  // }
 
   register(login: LoginRequest): Observable<RegisterResponse> {
     const url = `${this.authUrl}/users/register`;
