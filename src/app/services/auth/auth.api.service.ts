@@ -13,8 +13,6 @@ export class AuthApiService {
   private http = inject(HttpClient);
   private authUrl: string = environment.baseUrl + 'auth';
 
-
-
   login(login: LoginRequest): Observable<LoginResponse> {
     const url = `${this.authUrl}/users/login`;
     return this.http.post<LoginResponse>(url, login);

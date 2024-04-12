@@ -18,10 +18,11 @@ export class AuthService {
     console.log('Retrieved token:', token);
     return token;
   }
+
   isAuthenticated(): boolean {
     const token = this.getAuthToken();
     console.log('Checking authentication status with token:', token);
-    return !!token;  // Returnerar true om en token finns, annars false
+    return !!token;
   }
 
 
