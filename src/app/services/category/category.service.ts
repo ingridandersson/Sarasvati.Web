@@ -17,7 +17,7 @@ export class CategoryService implements ICategoryService {
   }
 
   async getAllCategories(): Promise<Category[]> {
-    return await lastValueFrom(this.apiSvc.getAllCategories());
+    return await firstValueFrom(this.apiSvc.getAllCategories());
   }
 
   async updateCategory(category: Category): Promise<Category> {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Category } from '../../models/category/category.model';
 import { CategoryService } from '../../services/category/category.service';
 import { ICategoryService } from '../../abstract/icategory-service';
@@ -26,13 +26,8 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './list-categories.component.scss'
 })
 export class ListCategoriesComponent {
+  //#region Properties
   title = 'List of Categories';
-  categorySvc = inject(CategoryService) as ICategoryService;
-  dialog = inject(MatDialog);
-  authService = inject(AuthService);
-  router = inject(Router);
-
-
   public categories: Category[] = [];
   public newCategory: Category = {} as Category;
   public dataSource = new MatTableDataSource<Category>();
@@ -42,21 +37,35 @@ export class ListCategoriesComponent {
   searchTerm: string = '';
   public filteredDataSource: MatTableDataSource<Category> = new MatTableDataSource<Category>();
 
+  //#endregion
+
+
+  //#region constructor
+  categorySvc = inject(CategoryService) as ICategoryService;
+  dialog = inject(MatDialog);
+  authService = inject(AuthService);
+  router = inject(Router);
+  //#endregion
+
+
+
   async ngOnInit(): Promise<void> {
     await this.fetchCategories();
     this.filteredDataSource = new MatTableDataSource<Category>(this.categories);
   }
 
   filterCategories(searchTerm: string) {
-    this.filteredDataSource.data = (this.dataSource.data.filter((category: Category) =>
-      category.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    ));
+    this.filteredDataSource.data = this.dataSource.data.filter((category: Category) =>
+      category.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }
+
+
 
   async fetchCategories(): Promise<void> {
     try {
       this.categories = await this.categorySvc.getAllCategories();
-      console.log(this.categories);
+      console.log("Fetched categories:", this.categories);
       this.dataSource = new MatTableDataSource(this.categories);
       this.filteredDataSource = new MatTableDataSource(this.categories);
     } catch (error) {

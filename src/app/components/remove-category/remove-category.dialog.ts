@@ -17,12 +17,18 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './remove-category.dialog.scss'
 })
 export class RemoveCategoryDialogComponent {
+  //#region Properties
   title = 'Remove Category';
   category: Category;
+  //#region
+
+  //#region constructor
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<RemoveCategoryDialogComponent>) {
     console.log(this.data)
     this.category = this.data.category;
   }
+  //#endregion
+
 
   confirmRemove(): void {
     this.dialogRef.close(true);

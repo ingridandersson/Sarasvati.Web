@@ -17,12 +17,13 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './add-category.dialog.scss'
 })
 export class AddCategoryDialog {
+  //#region Properties
   title = 'Add Category';
-
   dialogRef = inject(MatDialogRef);
   data = inject(MAT_DIALOG_DATA);
   service = inject(CategoryService) as ICategoryService;
   errorMessage: string | undefined;
+  //#endregion
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -22,6 +22,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrl: './details-category.component.scss'
 })
 export class DetailsCategoryComponent {
+  //#region Properties
   title = 'Category Details';
   public category?: Category;
   errorMessage: string | undefined;
@@ -29,11 +30,14 @@ export class DetailsCategoryComponent {
   nameControl: FormControl = new FormControl('');
   public showEditForm = false;
   public showDescription = false;
+  //#endregion
 
+  //#region
   activatedRoute = inject(ActivatedRoute);
   service = inject(CategoryService) as ICategoryService;
   router = inject(Router);
   authService = inject(AuthService);
+  //#endregion
 
   goBack(): void {
     this.router.navigate(['categories']);

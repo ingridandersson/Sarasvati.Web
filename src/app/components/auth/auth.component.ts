@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 
 export class AuthComponent {
-
+  //#region Properties
   activeForm: string = 'login';
   isLoginMode: boolean = true;
 
@@ -26,15 +26,18 @@ export class AuthComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-
   signupForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
+  //#endregion
 
+  //#region constructor
   authService = inject(AuthService);
   router = inject(Router);
+  //#endregion
+
 
   toggleForm(formType: string) {
     this.activeForm = formType;
