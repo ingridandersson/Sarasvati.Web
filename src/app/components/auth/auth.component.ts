@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth/auth.service';
-import { LoginRequest } from '../../models/auth/login.request.model';
+import { LoginRequest, RegisterRequest } from '../../models/auth/login.request.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,6 +28,7 @@ export class AuthComponent {
   });
   signupForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
+    phonenumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
@@ -38,17 +39,16 @@ export class AuthComponent {
   router = inject(Router);
   //#endregion
 
-
   toggleForm(formType: string) {
     this.activeForm = formType;
+    this.isLoginMode = formType === 'login';
     if (this.isLoginMode) {
-      this.isLoginMode = formType === 'login';
+      this.router.navigate(['/auth/login']);
     }
     else {
       this.router.navigate(['/auth/register']);
     }
   }
-
   async onLoginSubmit() {
     console.log('Login mode');
     if (this.loginForm.valid) {
@@ -65,22 +65,22 @@ export class AuthComponent {
       }
     }
   }
-
   async onSignupSubmit() {
     console.log('Signup mode');
     if (this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword) {
       try {
-        const response = await this.authService.register(
-          this.signupForm.value.email as string,
-          this.signupForm.value.password as string,
-          this.signupForm.value.confirmPassword as string
-        );
+        const request: RegisterRequest = {
+          email: this.signupForm.value.email as string,
+          phonenumber: this.signupForm.value.phonenumber as string,
+          password: this.signupForm.value.password as string,
+          confirmPassword: this.signupForm.value.confirmPassword as string
+        };
+        const response = await this.authService.register(request);
         console.log('User registered successfully', response);
-
         if (response) {
           await this.authService.acknowledgeNewUser(response);
           console.log('Account confirmed successfully');
-          // this.router.navigate(['/categories']);
+          //this.router.navigate(['/categories']);
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate(['/auth/login']);
           });

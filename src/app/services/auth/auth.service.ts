@@ -1,6 +1,6 @@
 import { Inject, Injectable, inject } from "@angular/core";
 import { AuthApiService } from "./auth.api.service";
-import { LoginRequest } from "../../models/auth/login.request.model";
+import { LoginRequest, RegisterRequest } from "../../models/auth/login.request.model";
 import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
 import { firstValueFrom } from "rxjs";
 import { HttpClient } from "@angular/common/http";
@@ -15,7 +15,7 @@ export class AuthService {
 
   getAuthToken(): string | null {
     const token = localStorage.getItem('access_token');
-    console.log('Retrieved token:', token);
+    console.log('Retrieved token');
     return token;
   }
 
@@ -53,10 +53,17 @@ export class AuthService {
 
   }
 
-  public async register(email: string, password: string, confirmPassword: string): Promise<RegisterResponse> {
-    const registerRequest = { email, password, confirmPassword };
-    return await firstValueFrom(this.apiSvc.register(registerRequest));
+  // public async register(email: string, phonenumber: string, password: string, confirmPassword: string): Promise<RegisterResponse> {
+  //   const registerRequest = { email, phonenumber, password, confirmPassword };
+  //   return await firstValueFrom(this.apiSvc.register(registerRequest));
+  // }
+
+  public async register(registerData: RegisterRequest): Promise<RegisterResponse> {
+    const registerRequest = { registerData };
+    console.log('Sending registerRequest:', registerRequest); // Lägg till detta för att se objektet
+    return await firstValueFrom(this.apiSvc.register(registerData));
   }
+
 
   async acknowledgeNewUser(token: RegisterResponse): Promise<AcknowledgeResponse> {
     return await firstValueFrom(this.apiSvc.acknowledgeUser(token));

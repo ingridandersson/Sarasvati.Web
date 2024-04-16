@@ -39,7 +39,6 @@ export class ListCategoriesComponent {
 
   //#endregion
 
-
   //#region constructor
   categorySvc = inject(CategoryService) as ICategoryService;
   dialog = inject(MatDialog);
@@ -59,8 +58,6 @@ export class ListCategoriesComponent {
       category.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
-
-
 
   async fetchCategories(): Promise<void> {
     try {
@@ -105,7 +102,6 @@ export class ListCategoriesComponent {
       }
     }
   }
-
   async removeCategory(id: GUID): Promise<void> {
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/auth/login']);
