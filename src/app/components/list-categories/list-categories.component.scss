@@ -1,11 +1,6 @@
-.sticky-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  z-index: 1000;
-  padding: 10px 0;
+.table-table {
+  height: auto;
+  overflow: scroll;
 }
 
 mat-form-field {

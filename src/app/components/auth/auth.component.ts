@@ -41,9 +41,8 @@ export class AuthComponent {
 
   toggleForm(formType: string) {
     this.activeForm = formType;
-    this.isLoginMode = formType === 'login';
     if (this.isLoginMode) {
-      this.router.navigate(['/auth/login']);
+      this.isLoginMode = formType === 'login';
     }
     else {
       this.router.navigate(['/auth/register']);

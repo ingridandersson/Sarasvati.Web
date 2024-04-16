@@ -1,6 +1,5 @@
 <div class="sticky-header">
 
-
   <h1 id="tableLabel">{{title}}</h1>
 
   <mat-form-field class="form-field">
@@ -16,33 +15,36 @@
     <mat-icon>add</mat-icon>
   </button>
 </div>
-<table mat-table [dataSource]="filteredDataSource" class="mat-elevation">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let category">
-      <a [routerLink]="['/category', category.id]">{{category.name}}</a>
-    </td>
-  </ng-container>
+<div class="table-table">
 
-  <ng-container matColumnDef="visible">
-    <th mat-header-cell *matHeaderCellDef> Visible </th>
-    <td mat-cell *matCellDef="let category"> {{category.visible}}</td>
-  </ng-container>
+  <table mat-table [dataSource]="filteredDataSource" class="mat-elevation">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let category">
+        <a [routerLink]="['/category', category.id]">{{category.name}}</a>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let category">
-      <button mat-icon-button color="primary" [routerLink]="['/category', category.id]">
-        <mat-icon>edit</mat-icon>
-      </button>
+    <ng-container matColumnDef="visible">
+      <th mat-header-cell *matHeaderCellDef> Visible </th>
+      <td mat-cell *matCellDef="let category"> {{category.visible}}</td>
+    </ng-container>
 
-      <button mat-icon-button color="warn" (click)="removeCategory(category.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let category">
+        <button mat-icon-button color="primary" [routerLink]="['/category', category.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
 
-  <tr mat-header-row *matHeaderRowDef="columns"></tr>
-  <tr mat-row (click)="setActiveCategory(row, row.id)" *matRowDef="let row; columns: columns;">
-  </tr>
-</table>
+        <button mat-icon-button color="warn" (click)="removeCategory(category.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row (click)="setActiveCategory(row , row.id)" *matRowDef="let row; columns: columns;">
+    </tr>
+  </table>
+</div>
