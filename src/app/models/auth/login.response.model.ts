@@ -9,19 +9,25 @@ export class LoginResponse {
 }
 
 export class RegisterResponse {
-  // guid!: string;
-  // email!: string;
-  // roles!: string[];
-  // jwtToken!: string;
-  // refreshToken!: string;
-  //token!: string;
   url!: string;
 }
 
-export class AcknowledgeResponse {
+export class AcknowledgeUserResponse {
   token!: string;
-
   constructor(token: string) {
     this.token = token;
   }
 }
+
+export class AcknowledgePasswordResponse {
+  token!: string;
+  constructor(token: string) {
+    this.token = token;
+  }
+}
+
+export class ResetPasswordResponse {
+  url!: string;
+}
+
+

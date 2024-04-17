@@ -37,16 +37,12 @@
   text-align: center;
   transition: .2s ease;
   border-radius: 15px;
-
 }
 
 .tab-button.active {
   background-color: var(--main-color);
   color: white;
-
 }
-
-
 
 mat-form-field {
   width: 100%;
@@ -57,12 +53,13 @@ mat-form-field {
 .login-button {
   width: 100%;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .login-text,
 .signup-text {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 a {

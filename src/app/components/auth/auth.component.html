@@ -19,6 +19,8 @@
         </mat-form-field>
         <button mat-raised-button color="primary" class="login-button" type="submit">Login</button>
       </form>
+      <p class="signup-text">Forgot your password? <a href=""
+          (click)="toggleForm('password/reset'); $event.preventDefault();">Reset it here</a></p>
       <p class="signup-text">Don't have an account? <a href=""
           (click)="toggleForm('signup'); $event.preventDefault();">Sign up here</a></p>
     </div>
@@ -57,7 +59,6 @@
       </form>
       <p class="signup-text">Already have an account? <a href="#"
           (click)="toggleForm('login'); $event.preventDefault();">Login here</a></p>
-
     </div>
   </form>
   }

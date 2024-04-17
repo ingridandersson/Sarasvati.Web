@@ -9,3 +9,9 @@ export class RegisterRequest {
   password!: string;
   confirmPassword!: string;
 }
+
+export class ResetPasswordRequest {
+  email!: string;
+  password!: string;
+  confirmPassword!: string;
+}
