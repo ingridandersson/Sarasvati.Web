@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "../environments/environment.local";
 import { Observable } from "rxjs";
-import { LoginRequest, RegisterRequest } from "../../models/auth/login.request.model";
-import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
+import { LoginRequest, RegisterRequest, ResetPasswordRequest } from "../../models/auth/auth.request.model";
+import { AcknowledgeUserResponse, LoginResponse, RegisterResponse, ResetPasswordResponse } from "../../models/auth/auth.response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -18,30 +18,29 @@ export class AuthApiService {
     return this.http.post<LoginResponse>(url, login);
   }
 
-  // login(login: LoginRequest): Observable<LoginResponse> {
-  //   return this.http.post<LoginResponse>(`${this.authUrl}/login`, login);
-  // }
-
   register(registerData: RegisterRequest): Observable<RegisterResponse> {
     const url = `${this.authUrl}/users/register`;
     return this.http.post<RegisterResponse>(url, registerData);
   }
 
-  acknowledgeUser(token: RegisterResponse): Observable<AcknowledgeResponse> {
-    const url = `${this.authUrl}/users/acknowledge`;
-    return this.http.get<AcknowledgeResponse>(token.url);
+  acknowledgeUser(tokenUrl: string): Observable<AcknowledgeUserResponse> {
+    return this.http.get<AcknowledgeUserResponse>(tokenUrl);
   }
 
-  logout(logout: any): Observable<any> {
+  logout(): Observable<any> {
     const url = `${this.authUrl}/home`;
     return this.http.post(url, this.logout);
   }
 
+  acknowledgePassword(tokenUrl: string): Observable<AcknowledgeUserResponse> {
+    const url = `${this.authUrl}/auth/password/acknowledge`;
+    return this.http.get<AcknowledgeUserResponse>(tokenUrl);
+  }
 
-  // resetPassword(username: string) {
-  //     const url = this.authUrl + '/reset-password';
-  //     return this.http.post(url, { username });
-  // }
+  resetPassword(token: ResetPasswordRequest): Observable<ResetPasswordResponse> {
+    const url = `${this.authUrl}/password/reset`;
+    return this.http.post<ResetPasswordResponse>(url, token);
+  }
 
   // getUsers() {
   //     const url = this.authUrl + '/users';

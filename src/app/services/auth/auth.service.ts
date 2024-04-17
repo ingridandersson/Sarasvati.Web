@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
 import { AuthApiService } from "./auth.api.service";
-import { LoginRequest, RegisterRequest } from "../../models/auth/login.request.model";
-import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
-import { BehaviorSubject, firstValueFrom } from "rxjs";
+import { LoginRequest, RegisterRequest, ResetPasswordRequest } from "../../models/auth/auth.request.model";
+import { AcknowledgePasswordResponse, AcknowledgeUserResponse, LoginResponse, RegisterResponse, ResetPasswordResponse } from "../../models/auth/auth.response.model";
+import { firstValueFrom, BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -34,24 +34,8 @@ export class AuthService {
     return !!token;
   }
 
-
-  // async login(login: LoginRequest): Promise<LoginResponse> {
-  //   return await firstValueFrom(this.apiSvc.login(login));
-  // }
-
-  // getAuthToken(): string | null {
-  //   return localStorage.getItem('access_token');
-  // }
-
-  // async login(loginRequest: LoginRequest): Promise<LoginResponse> {
-  //   const response = await firstValueFrom(this.apiSvc.login(loginRequest));
-  //   return response;
-  // }
-
-
   async login(loginRequest: LoginRequest): Promise<LoginResponse> {
     const response = await firstValueFrom(this.apiSvc.login(loginRequest));
-
     if (response && response.jwtToken) {
       localStorage.setItem('access_token', response.jwtToken);
       console.log('Token saved:', response.jwtToken);
@@ -60,23 +44,26 @@ export class AuthService {
       console.log('No token received:', response);
     }
     return response;
-
   }
-
-  // public async register(email: string, phonenumber: string, password: string, confirmPassword: string): Promise<RegisterResponse> {
-  //   const registerRequest = { email, phonenumber, password, confirmPassword };
-  //   return await firstValueFrom(this.apiSvc.register(registerRequest));
-  // }
 
   public async register(registerData: RegisterRequest): Promise<RegisterResponse> {
-    const registerRequest = { registerData };
-    console.log('Sending registerRequest:', registerRequest); // Lägg till detta för att se objektet
-    return await firstValueFrom(this.apiSvc.register(registerData));
+    const response = await firstValueFrom(this.apiSvc.register(registerData));
+    console.log('Sending registerresponse:', response);
+    return response;
   }
 
+  async acknowledgeNewUser(tokenUrl: string): Promise<AcknowledgeUserResponse> {
+    return await firstValueFrom(this.apiSvc.acknowledgeUser(tokenUrl));
+  }
 
-  async acknowledgeNewUser(token: RegisterResponse): Promise<AcknowledgeResponse> {
-    return await firstValueFrom(this.apiSvc.acknowledgeUser(token));
+  async acknowledgeNewPassword(tokenUrl: string): Promise<AcknowledgePasswordResponse> {
+    return await firstValueFrom(this.apiSvc.acknowledgePassword(tokenUrl));
+  }
+
+  async resetPassword(passwordRequest: ResetPasswordRequest): Promise<ResetPasswordResponse> {
+    const response = await firstValueFrom(this.apiSvc.resetPassword(passwordRequest));
+    console.log('Reset password token:', response);
+    return response;
   }
 
   async logout(): Promise<void> {

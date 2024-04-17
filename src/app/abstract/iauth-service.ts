@@ -1,5 +1,5 @@
 //import { GUID } from "../models/guid.model";
-import { LoginRequest } from "../models/auth/login.request.model";
+import { LoginRequest } from "../models/auth/auth.request.model";
 //import { LoginResponse } from "../models/auth/login.response.model";
 
 
