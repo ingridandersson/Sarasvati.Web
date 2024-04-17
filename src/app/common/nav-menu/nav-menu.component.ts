@@ -19,15 +19,12 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean = false;
   private authSubscription!: Subscription;
 
-  constructor(private router: Router, private authService: AuthService) {
-    this.authService.currentUser.subscribe(user => {
-      this.isAuthenticated = !!user;
-    });
-  }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.authSubscription = this.authService.currentUser.subscribe(user => {
+    this.authSubscription = this.authService.currentUserSubject.subscribe(user => {
       this.isAuthenticated = !!user;
+      console.log('User authenticated:', this.isAuthenticated);
     });
   }
 

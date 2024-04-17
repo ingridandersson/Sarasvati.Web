@@ -9,7 +9,7 @@ import { BehaviorSubject, firstValueFrom } from "rxjs";
 })
 export class AuthService {
   private apiSvc = inject(AuthApiService);
-  private currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
+  public currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
   public currentUser = this.currentUserSubject.asObservable();
 
   constructor() {
@@ -55,6 +55,7 @@ export class AuthService {
     if (response && response.jwtToken) {
       localStorage.setItem('access_token', response.jwtToken);
       console.log('Token saved:', response.jwtToken);
+      this.currentUserSubject.next(response);
     } else {
       console.log('No token received:', response);
     }
@@ -79,16 +80,7 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    try {
-      await firstValueFrom(this.apiSvc.logout({}));
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('access_token');
-      this.currentUserSubject.next(null);
-      console.log('User logged out');
-    } catch (error) {
-      console.error('Logout failed:', error);
-      return Promise.resolve();
-    }
-
+    localStorage.removeItem('access_token');
+    this.currentUserSubject.next(null);
   }
-} 
+}

@@ -33,8 +33,8 @@ export class AuthApiService {
   }
 
   logout(logout: any): Observable<any> {
-    const url = `${this.authUrl}/users/logout`;
-    return this.http.post(url, logout);
+    const url = `${this.authUrl}/home`;
+    return this.http.post(url, this.logout);
   }
 
 

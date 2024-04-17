@@ -8,8 +8,14 @@
     <a class="link" mat-flat-button color="primary" [routerLink]="['/categories']"> Categories </a>
 
     <span class="spacer"></span>
-    <button class="link" mat-flat-button color="primary" (click)="login()"> Log in </button>
+    @if(isAuthenticated){
+
     <button class="link" mat-flat-button color="primary" (click)="logout()">Log out</button>
+    }
+    @else {
+
+    <button class="link" mat-flat-button color="primary" (click)="login()"> Log in </button>
+    }
     <!-- [routerLink]="isAuthenticated ? ['/auth/logout'] :
     ['/auth/login']" -->
   </mat-toolbar>
