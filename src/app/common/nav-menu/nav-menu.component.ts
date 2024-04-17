@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularMaterialComponent } from '../angular-material/angular-material.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
@@ -14,36 +14,51 @@ import { Subscription } from 'rxjs';
   templateUrl: './nav-menu.component.html',
   styleUrl: './nav-menu.component.scss'
 })
+
 export class NavMenuComponent implements OnInit, OnDestroy {
-  username: string | null = null;
-  userSubscription: Subscription | undefined;
+  isAuthenticated: boolean = false;
+  private authSubscription!: Subscription;
 
-  constructor(private authSvc: AuthService, private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) {
+    this.authService.currentUser.subscribe(user => {
+      this.isAuthenticated = !!user;
+    });
+  }
 
-  ngOnInit(): void {
-    this.userSubscription = this.authSvc.currentUser.subscribe(user => {
-      this.username = user ? user.username : null;
+  ngOnInit() {
+    this.authSubscription = this.authService.currentUser.subscribe(user => {
+      this.isAuthenticated = !!user;
     });
   }
 
   ngOnDestroy(): void {
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
+    this.authSubscription.unsubscribe();
   }
 
-  isLoading = false;
+  login() {
+    this.router.navigate(['/auth/login']);
+  }
 
-  onLogout() {
-    this.isLoading = true;
-    this.authSvc.logout().then(() => {
-      this.router.navigate(['/login']).finally(() => {
-        this.isLoading = false;
-      });
+  logout() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/']);
     }).catch(error => {
-      console.error('Error logging out:', error);
-      this.isLoading = false;
+      console.error('Logout failed:', error);
     });
   }
-}
 
+
+  // toggleLoginLogout(): void {
+  //   if (this.isAuthenticated) {
+  //     this.authService.logout().then(() => {
+  //       this.isAuthenticated = false;
+  //       this.router.navigate(['/']);
+  //     }).catch(error => {
+  //       console.error('Logout failed:', error);
+  //     });
+  //   }
+  //   else {
+  //     this.router.navigate(['/auth/login']);
+  //   }
+  // }
+}

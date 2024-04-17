@@ -30,7 +30,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.getAuthToken();
-    console.log('Checking authentication status with token:', token);
+    console.log('Checking authentication status with token:');
     return !!token;
   }
 
@@ -79,12 +79,16 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    console.log('User logged out');
-    return Promise.resolve();
+    try {
+      await firstValueFrom(this.apiSvc.logout({}));
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('access_token');
+      this.currentUserSubject.next(null);
+      console.log('User logged out');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      return Promise.resolve();
+    }
+
   }
-
-}
-
+} 
