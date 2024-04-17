@@ -6,7 +6,23 @@
       </a>
     </a>
     <a class="link" mat-flat-button color="primary" [routerLink]="['/categories']"> Categories </a>
+
     <span class="spacer"></span>
-    <a class="link" mat-flat-button color="primary" [routerLink]="['/auth/login']">Login</a>
+    <a class="link" mat-flat-button color="primary" [routerLink]="['/auth/login']">Log in</a>
+
+    @if(username)
+    {
+    <a class="link" mat-flat-button color="primary" click="onLogout">Log out</a>
+    <!-- <span class="link" mat-flat-button color="primary">logged in as {{username}}</span> -->
+    <!-- <ng-container *ngIf="username; else loginTemplate"> -->
+    <!-- <span class="link" mat-flat-button color="primary">logged in as {{username}}</span>
+      <a class="link" mat-flat-button color="primary" click="onLogout">Log out</a>
+      <a class="link" mat-flat-button color="primary" [routerLink]="['/auth/login']">Log in</a>  -->
+    <!-- </ng-container> -->
+    <ng-template #loginTemplate>
+      <a class="link" mat-flat-button color="primary" [routerLink]="['/auth/login']">Log in</a>
+    </ng-template>
+    }
+
   </mat-toolbar>
 </header>

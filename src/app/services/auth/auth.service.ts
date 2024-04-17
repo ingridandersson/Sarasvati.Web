@@ -1,17 +1,26 @@
-import { Inject, Injectable, inject } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AuthApiService } from "./auth.api.service";
 import { LoginRequest } from "../../models/auth/login.request.model";
 import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
-import { firstValueFrom } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject, firstValueFrom } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private apiSvc = inject(AuthApiService);
+  private currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
+  public currentUser = this.currentUserSubject.asObservable();
 
-  apiSvc = inject(AuthApiService)
-  httpClient = inject(HttpClient)
+  constructor() {
+    this.loadInitailUser();
+  }
+  loadInitailUser() {
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      this.currentUserSubject.next(JSON.parse(userData));
+    }
+  }
 
   getAuthToken(): string | null {
     const token = localStorage.getItem('access_token');
@@ -63,7 +72,11 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+    console.log('User logged out');
+    return Promise.resolve();
   }
 
 }
