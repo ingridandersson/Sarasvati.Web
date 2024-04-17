@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "../environments/environment.local";
 import { Observable } from "rxjs";
-import { LoginRequest } from "../../models/auth/login.request.model";
+import { LoginRequest, RegisterRequest } from "../../models/auth/login.request.model";
 import { AcknowledgeResponse, LoginResponse, RegisterResponse } from "../../models/auth/login.response.model";
 
 @Injectable({
@@ -22,9 +22,9 @@ export class AuthApiService {
   //   return this.http.post<LoginResponse>(`${this.authUrl}/login`, login);
   // }
 
-  register(login: LoginRequest): Observable<RegisterResponse> {
+  register(registerData: RegisterRequest): Observable<RegisterResponse> {
     const url = `${this.authUrl}/users/register`;
-    return this.http.post<RegisterResponse>(url, login);
+    return this.http.post<RegisterResponse>(url, registerData);
   }
 
   acknowledgeUser(token: RegisterResponse): Observable<AcknowledgeResponse> {
