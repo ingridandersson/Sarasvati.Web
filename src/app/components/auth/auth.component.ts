@@ -18,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class AuthComponent {
+
   //#region Properties
   activeForm: string = 'login';
   isLoginMode: boolean = true;
@@ -31,6 +32,10 @@ export class AuthComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
+
+  signupError: boolean = false;
+  loginError: boolean = false;
+
   //#endregion
 
   //#region constructor
@@ -73,6 +78,7 @@ export class AuthComponent {
         this.router.navigate(['/categories']);
       } catch (error) {
         console.error('Login Error', error);
+        this.loginError = true;
       }
     }
   }
@@ -98,9 +104,12 @@ export class AuthComponent {
         }
       } catch (error) {
         console.error('Registration Error', error);
+        this.signupError = true;
       }
     } else {
       console.log('Form is not valid or passwords do not match');
+      this.signupError = true;
+
     }
   }
 }

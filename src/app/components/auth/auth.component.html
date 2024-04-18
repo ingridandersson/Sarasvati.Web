@@ -9,6 +9,9 @@
         <button mat-button class="tab-button" (click)="toggleForm('signup')">Sign up</button>
       </div>
       <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+        <div *ngIf="loginError" class="error-message">
+          Incorrect email or password. Please try again.
+        </div>
         <mat-form-field appearance="fill">
           <mat-label>Email Address</mat-label>
           <input matInput formControlName="email" type="email" placeholder="Enter your email" required>
@@ -37,6 +40,9 @@
           [ngClass]="{'active': activeForm === 'signup'}">Sign up</button>
       </div>
       <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+        <div *ngIf="signupError" class="error-message">
+          Form is not valid or passwords do not match.
+        </div>
         <mat-form-field appearance="fill">
           <mat-label>Email Address</mat-label>
           <input matInput formControlName="email" type="email" placeholder="Enter your email" required>

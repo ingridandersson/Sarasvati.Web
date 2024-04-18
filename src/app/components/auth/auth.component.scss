@@ -66,3 +66,9 @@ a {
   color: var(--main-color);
   text-decoration: underline;
 }
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin: 20px;
+}

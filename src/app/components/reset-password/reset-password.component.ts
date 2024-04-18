@@ -18,7 +18,8 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class RessetPasswordComponent {
 
-  //#region constructor
+  //#region properties
+  ressetPasswordError: boolean = false;
   RessetPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -30,6 +31,8 @@ export class RessetPasswordComponent {
   authService = inject(AuthService);
   router = inject(Router);
   //#endregion
+
+
 
   async onRessetPasswordSubmit() {
     console.log('Resset Password mode');
@@ -51,11 +54,16 @@ export class RessetPasswordComponent {
         }
       } catch (error) {
         console.error('Registration Error', error);
+        this.ressetPasswordError = true;
       }
     } else {
       console.log('Form is not valid or passwords do not match');
+      this.ressetPasswordError = true;
     }
   }
 
+  onNoClick(): void {
+    this.router.navigate(['/auth/login']);
+  }
 }
 

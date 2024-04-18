@@ -8,13 +8,18 @@ import { firstValueFrom, BehaviorSubject } from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  private apiSvc = inject(AuthApiService);
+  //#region properties
   public currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
   public currentUser = this.currentUserSubject.asObservable();
+  //#endregion
 
+  //#region constructor
+  private apiSvc = inject(AuthApiService);
   constructor() {
     this.loadInitailUser();
   }
+  //#endregion
+
   loadInitailUser() {
     const userData = localStorage.getItem('currentUser');
     if (userData) {
