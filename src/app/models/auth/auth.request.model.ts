@@ -15,3 +15,7 @@ export class ResetPasswordRequest {
   password!: string;
   confirmPassword!: string;
 }
+
+// export class LogoutRequest {
+//   email!: string;
+// }

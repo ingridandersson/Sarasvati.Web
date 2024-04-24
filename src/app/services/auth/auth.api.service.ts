@@ -32,6 +32,11 @@ export class AuthApiService {
     return this.http.post(url, this.logout);
   }
 
+  // logout(): Observable<any> {
+  //   const url = `${this.authUrl}/users/logout`;
+  //   return this.http.post(url, {});
+  // }
+
   acknowledgePassword(tokenUrl: string): Observable<AcknowledgeUserResponse> {
     const url = `${this.authUrl}/auth/password/acknowledge`;
     return this.http.get<AcknowledgeUserResponse>(tokenUrl);

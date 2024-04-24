@@ -30,4 +30,8 @@ export class ResetPasswordResponse {
   url!: string;
 }
 
+// export class LogoutResponse {
+//   email!: string;
+// }
+
 

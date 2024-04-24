@@ -39,6 +39,12 @@ export class AuthService {
     return !!token;
   }
 
+  isAdmin(): boolean {
+    const user = this.currentUserSubject.value;
+    console.log('Checking if user is admin:', user);
+    return user != null && user!.roles.includes('Admin');
+  }
+
   async login(loginRequest: LoginRequest): Promise<LoginResponse> {
     const response = await firstValueFrom(this.apiSvc.login(loginRequest));
     if (response && response.jwtToken) {
@@ -75,4 +81,17 @@ export class AuthService {
     localStorage.removeItem('access_token');
     this.currentUserSubject.next(null);
   }
+
+  // async logout(): Promise<void> {
+  //   try {
+  //     await firstValueFrom(this.apiSvc.logout());
+  //     localStorage.removeItem('access_token');
+  //     this.currentUserSubject.next(null);
+  //   }
+  //   catch (error) {
+  //     console.error('Error logging out:', error);
+  //     throw error;
+  //   }
+  // }
+
 }

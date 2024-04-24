@@ -32,6 +32,7 @@ export class ListCategoriesComponent {
   public newCategory: Category = {} as Category;
   public dataSource = new MatTableDataSource<Category>();
   columns: string[] = ['name', 'visible', 'actions'];
+
   errorMessage: string | undefined;
   currentIndex = -1;
   searchTerm: string = '';

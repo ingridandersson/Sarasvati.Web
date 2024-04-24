@@ -75,7 +75,7 @@ export class AuthComponent {
       try {
         const response = await this.authService.login(loginRequest);
         console.log('User logged in successfully', response);
-        this.router.navigate(['/categories']);
+        this.router.navigate(['/home']);
       } catch (error) {
         console.error('Login Error', error);
         this.loginError = true;
@@ -98,9 +98,13 @@ export class AuthComponent {
         if (response) {
           await this.authService.acknowledgeNewUser(response.url);
           console.log('Account confirmed successfully');
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/auth/login']);
-          });
+          const login = await this.authService.login(request);
+          console.log('User logged in successfully', login);
+          this.router.navigate(['/categories']);
+
+          //this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          //this.router.navigate(['/auth/login']);
+          //});
         }
       } catch (error) {
         console.error('Registration Error', error);
