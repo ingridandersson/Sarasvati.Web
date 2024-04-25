@@ -24,6 +24,8 @@ export class AuthService {
     const userData = localStorage.getItem('currentUser');
     if (userData) {
       this.currentUserSubject.next(JSON.parse(userData));
+    } else {
+      this.currentUserSubject.next(null);
     }
   }
 
@@ -47,9 +49,12 @@ export class AuthService {
 
   async login(loginRequest: LoginRequest): Promise<LoginResponse> {
     const response = await firstValueFrom(this.apiSvc.login(loginRequest));
+    console.log('Login Response:', response);
     if (response && response.jwtToken) {
       localStorage.setItem('access_token', response.jwtToken);
-      console.log('Token saved:', response.jwtToken);
+      localStorage.setItem('currentUser', JSON.stringify(response));
+      // console.log('Token saved:', response.jwtToken);
+      // console.log('logged in as:', response.username);
       this.currentUserSubject.next(response);
     } else {
       console.log('No token received:', response);
