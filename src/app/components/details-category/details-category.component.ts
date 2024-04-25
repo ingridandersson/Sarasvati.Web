@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -37,6 +38,8 @@ export class DetailsCategoryComponent {
   service = inject(CategoryService) as ICategoryService;
   router = inject(Router);
   authService = inject(AuthService);
+  snackBar = inject(MatSnackBar);
+
   //#endregion
 
   goBack(): void {
@@ -62,6 +65,11 @@ export class DetailsCategoryComponent {
   toggleEditForm(): void {
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/auth/login']);
+      return;
+    }
+    if (!this.authService.isAdmin()) {
+      this.snackBar.open('You do not have permission to perform this action.', 'Close', {
+      });
       return;
     }
     this.showEditForm = !this.showEditForm;

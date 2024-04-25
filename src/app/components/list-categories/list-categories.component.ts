@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list-categories',
@@ -45,6 +46,7 @@ export class ListCategoriesComponent {
   dialog = inject(MatDialog);
   authService = inject(AuthService);
   router = inject(Router);
+  snackBar = inject(MatSnackBar);
   //#endregion
 
 
@@ -106,6 +108,11 @@ export class ListCategoriesComponent {
   async removeCategory(id: GUID): Promise<void> {
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/auth/login']);
+      return;
+    }
+    if (!this.authService.isAdmin()) {
+      this.snackBar.open('You do not have permission to perform this action.', 'Close', {
+      });
       return;
     }
     const categoryToBeRemoved = this.dataSource.data.find(c => c.id === id);
