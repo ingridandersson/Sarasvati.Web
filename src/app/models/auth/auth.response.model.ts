@@ -6,6 +6,7 @@ export class LoginResponse {
   jwtToken!: string;
   refreshToken!: string;
   token!: string;
+  email: string | undefined;
 }
 
 export class RegisterResponse {

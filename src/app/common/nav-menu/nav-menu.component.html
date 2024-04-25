@@ -10,12 +10,15 @@
     <span class="spacer"></span>
     @if(isAuthenticated){
 
-    <button class="link" mat-flat-button color="primary" (click)="logout()">Log out</button>
+    <button class="link" mat-flat-button color="primary" (click)="logout()">
+      Log out</button>
+    <p class="username">{{username}}</p>
     }
     @else {
 
     <button class="link" mat-flat-button color="primary" (click)="login()"> Log in </button>
     }
+
     <!-- [routerLink]="isAuthenticated ? ['/auth/logout'] :
     ['/auth/login']" -->
   </mat-toolbar>

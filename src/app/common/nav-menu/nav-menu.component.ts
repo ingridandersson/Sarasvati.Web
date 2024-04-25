@@ -17,14 +17,17 @@ import { Subscription } from 'rxjs';
 
 export class NavMenuComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean = false;
+  username: string = '';
   private authSubscription!: Subscription;
 
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.authSubscription = this.authService.currentUserSubject.subscribe(user => {
+      console.log('Current user data in subscribtion:', user);
       this.isAuthenticated = !!user;
-      console.log('User authenticated:', this.isAuthenticated);
+      this.username = user ? user.email ?? '' : '';
+      // console.log('User authenticated:', this.isAuthenticated, 'username:', this.username);
     });
   }
 
@@ -44,18 +47,4 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  // toggleLoginLogout(): void {
-  //   if (this.isAuthenticated) {
-  //     this.authService.logout().then(() => {
-  //       this.isAuthenticated = false;
-  //       this.router.navigate(['/']);
-  //     }).catch(error => {
-  //       console.error('Logout failed:', error);
-  //     });
-  //   }
-  //   else {
-  //     this.router.navigate(['/auth/login']);
-  //   }
-  // }
 }
