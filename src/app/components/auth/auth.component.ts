@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth/auth.service';
 import { LoginRequest, RegisterRequest } from '../../models/auth/auth.request.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -27,6 +28,8 @@ export class AuthComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
   signupForm = new FormGroup({
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phonenumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -88,6 +91,8 @@ export class AuthComponent {
     if (this.signupForm.valid && this.signupForm.value.password === this.signupForm.value.confirmPassword) {
       try {
         const request: RegisterRequest = {
+          firstname: this.signupForm.value.firstname as string,
+          lastname: this.signupForm.value.lastname as string,
           email: this.signupForm.value.email as string,
           phonenumber: this.signupForm.value.phonenumber as string,
           password: this.signupForm.value.password as string,

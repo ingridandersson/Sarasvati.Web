@@ -4,11 +4,15 @@ export class LoginRequest {
 }
 
 export class RegisterRequest {
+  firstname!: string;
+  lastname!: string;
   email!: string;
   phonenumber!: string;
   password!: string;
   confirmPassword!: string;
 }
+
+
 
 export class ResetPasswordRequest {
   email!: string;

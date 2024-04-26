@@ -18,20 +18,20 @@ export const testGuard: CanMatchFn = async (route, segments) => {
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard {
-  authService = inject(AuthService);
-  router = inject(Router);
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class AuthGuard {
+//   authService = inject(AuthService);
+//   router = inject(Router);
 
-  canActivate(): boolean {
-    if (!this.authService.isAuthenticated() && !this.authService.isAdmin()) {
+//   canActivate(): boolean {
+//     if (!this.authService.isAuthenticated() && !this.authService.isAdmin()) {
 
-      this.router.navigate(['/login']);
-      return false;
-    }
-    console.log('User is authenticated & is admin');
-    return true;
-  }
-}
+//       this.router.navigate(['/login']);
+//       return false;
+//     }
+//     console.log('User is authenticated & is admin');
+//     return true;
+//   }
+// }
