@@ -12,7 +12,7 @@
 
     <button class="link" mat-flat-button color="primary" (click)="logout()">
       Log out</button>
-    <p class="username">{{username}}</p>
+    <button class="link" mat-flat-button color="primary" [routerLink]="['/user']">{{username}}</button>
     }
     @else {
 

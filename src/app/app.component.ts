@@ -5,6 +5,7 @@ import { ListCategoriesComponent } from './components/list-categories/list-categ
 import { HomeComponent } from './common/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailsCategoryComponent } from './components/details-category/details-category.component';
+import { UserComponent } from './components/user/user.component';
 
 
 
@@ -19,7 +20,8 @@ import { DetailsCategoryComponent } from './components/details-category/details-
     ListCategoriesComponent,
     HomeComponent,
     HttpClientModule,
-    DetailsCategoryComponent
+    DetailsCategoryComponent,
+    UserComponent
   ]
 })
 export class AppComponent {
