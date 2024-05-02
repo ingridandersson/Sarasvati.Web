@@ -88,6 +88,11 @@ export class ListCategoriesComponent {
       this.router.navigate(['/auth/login']);
       return;
     }
+    if (!this.authService.isAdmin()) {
+      this.snackBar.open('You do not have permission to perform this action.', 'Close', {
+      });
+      return;
+    }
     this.newCategory = {} as Category;
     const dialogRef = this.dialog.open(AddCategoryDialog, {
       data: this.newCategory,
