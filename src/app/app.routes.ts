@@ -4,7 +4,7 @@ import { ListCategoriesComponent } from './components/list-categories/list-categ
 import { DetailsCategoryComponent } from './components/details-category/details-category.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { RessetPasswordComponent } from './components/reset-password/reset-password.component';
-import { testGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { UserComponent } from './components/user/user.component';
 
 export const routes: Routes = [
@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'user', component: UserComponent },
   {
     path: 'categories',
-    canMatch: [testGuard],
+    canMatch: [AuthGuard],
     component: ListCategoriesComponent
   },
   {
@@ -28,5 +28,4 @@ export const routes: Routes = [
     ]
   }
 ];
-
 export const AppRoutes = RouterModule.forRoot(routes);

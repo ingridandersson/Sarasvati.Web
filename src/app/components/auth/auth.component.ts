@@ -78,7 +78,7 @@ export class AuthComponent {
       try {
         const response = await this.authService.login(loginRequest);
         console.log('User logged in successfully', response);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/categories']);
       } catch (error) {
         console.error('Login Error', error);
         this.loginError = true;
