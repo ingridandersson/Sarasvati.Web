@@ -22,6 +22,11 @@ export class ApiService {
     return this.http.get<Category[]>(url);
   }
 
+  // getVisibleCategories(): Observable<Category[]> {
+  //   const url = this.categoryUrl + '/GetVisibleCategories';
+  //   return this.http.get<Category[]>(url);
+  // }
+
   updateCategory(category: Category): Observable<Category> {
     const url = this.categoryUrl + '/UpdateCategory';
     return this.http.put<Category>(url, category);

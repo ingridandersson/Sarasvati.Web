@@ -5,7 +5,7 @@
         <img src="assets/SarasvatiLogo.png" alt="SarasvatiLogo">
       </a>
     </a>
-    <a class="link" mat-flat-button color="primary" [routerLink]="['/categories']"> Categories </a>
+    <a class="link" mat-flat-button color="primary" (click)="navigateToCategories()"> Categories </a>
 
     <span class="spacer"></span>
     @if(isAuthenticated){
@@ -18,8 +18,5 @@
 
     <button class="link" mat-flat-button color="primary" (click)="login()"> Log in </button>
     }
-
-    <!-- [routerLink]="isAuthenticated ? ['/auth/logout'] :
-    ['/auth/login']" -->
   </mat-toolbar>
 </header>

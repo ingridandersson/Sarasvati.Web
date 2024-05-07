@@ -31,6 +31,14 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     });
   }
 
+  navigateToCategories(): void {
+    if (this.isAuthenticated) {
+      this.router.navigate(['/categories']);
+    } else {
+      this.router.navigate(['/auth/login']);
+    }
+  }
+
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
   }
