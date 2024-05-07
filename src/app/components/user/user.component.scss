@@ -1,0 +1,28 @@
+h1#tableLabel {
+    margin-top: 100px; 
+    margin-left: 640px;
+    font-size: 30px;
+    
+  }
+
+  #user-details{
+    
+    font-size: 20px;
+    margin-left: 640px;
+   
+   
+    
+  }
+  // Define variables for styles
+$light-grey: #f5f5f5;
+$border-radius: 10px;
+
+// Style for the specific area
+.area {
+  background-color: $light-grey;
+  border-radius: $border-radius;
+  padding: 20px; // Add padding for spacing inside the area
+}
+
+  
+  

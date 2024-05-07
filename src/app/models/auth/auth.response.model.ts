@@ -1,7 +1,8 @@
 
 export class LoginResponse {
   guid!: string;
-  fullname!: string;
+  firstname!: string;
+  lastname!: string;
   roles!: string[];
   jwtToken!: string;
   refreshToken!: string;

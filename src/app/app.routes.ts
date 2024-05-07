@@ -4,12 +4,8 @@ import { ListCategoriesComponent } from './components/list-categories/list-categ
 import { DetailsCategoryComponent } from './components/details-category/details-category.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { RessetPasswordComponent } from './components/reset-password/reset-password.component';
-<<<<<<< HEAD
 import { testGuard } from './auth.guard';
-=======
-import { AuthGuard, testGuard } from './auth.guard';
 import { UserComponent } from './components/user/user.component';
->>>>>>> e590b0745752c1f8e7f0539876424bfdb623a06a
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
